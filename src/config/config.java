@@ -1,73 +1,82 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package config;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
+import javax.swing.JTable;
 import net.proteanit.sql.DbUtils;
+
 /**
  *
- * @author HP Pro C640
+ * @author Administrator
  */
 public class config {
+
+    /**
+     * Opens and returns a SQLite connection to fishsale.db
+     */
     public static Connection connectDB() {
-        Connection con = null;
+        Connection conn = null;
         try {
-            Class.forName("org.sqlite.JDBC"); // Load the SQLite JDBC driver
-            con = DriverManager.getConnection("jdbc:sqlite:fishsale.db"); // Establish connection
-            System.out.println("Connection Successful");
-        } catch (Exception e) {
-            System.out.println("Connection Failed: " + e);
+            Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection("jdbc:sqlite:fishsale.db");
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println("Connection error: " + ex.getMessage());
         }
-        return con;
+        return conn;
     }
-    
-    public void addRecord(String sql, Object... values) {
-    try (Connection conn = connectDB();
-         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        for (int i = 0; i < values.length; i++) {
-            pstmt.setObject(i + 1, values[i]);
+
+    /**
+     * Executes any INSERT / UPDATE / DELETE with variadic parameters.
+     * Usage: addRecord("INSERT INTO tbl_user (...) VALUES (?,?,?)", v1, v2, v3);
+     */
+    public void addRecord(String sql, Object... params) {
+        try (Connection conn = connectDB();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            for (int i = 0; i < params.length; i++) {
+                ps.setObject(i + 1, params[i]);
+            }
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("addRecord error: " + ex.getMessage());
         }
-        pstmt.executeUpdate();
-        System.out.println("Record added successfully!");
-    } catch (SQLException e) {
-        System.out.println("Error adding record: " + e.getMessage());
     }
-}
-    
-    public String authenticate(String sql, Object... values) {
-    try (Connection conn = connectDB();
-         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        for (int i = 0; i < values.length; i++) {
-            pstmt.setObject(i + 1, values[i]);
+
+    /**
+     * Loads a SELECT query result into a JTable using rs2xml DbUtils.
+     * Usage: displayData("SELECT ... FROM ... WHERE col LIKE ?", table, "%kw%");
+     */
+    public void displayData(String sql, JTable table, Object... params) {
+        try (Connection conn = connectDB();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            for (int i = 0; i < params.length; i++) {
+                ps.setObject(i + 1, params[i]);
+            }
+            ResultSet rs = ps.executeQuery();
+            table.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (SQLException ex) {
+            System.out.println("displayData error: " + ex.getMessage());
         }
-        try (ResultSet rs = pstmt.executeQuery()) {
+    }
+
+    /**
+     * Authenticates a user and returns their type ("admin"/"user"), or null if not found.
+     */
+    public String authenticate(String sql, String username, String password) {
+        try (Connection conn = connectDB();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return rs.getString("type");
             }
+        } catch (SQLException ex) {
+            System.out.println("authenticate error: " + ex.getMessage());
         }
-    } catch (SQLException e) {
-        System.out.println("Login Error: " + e.getMessage());
+        return null;
     }
-    return null;
-}
-    
-    public void displayData(String sql, javax.swing.JTable table, Object... values) {
-    try (Connection conn = connectDB();
-         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        
-        // Set the parameters for the search
-        for (int i = 0; i < values.length; i++) {
-            pstmt.setObject(i + 1, values[i]);
-        }
-        try (ResultSet rs = pstmt.executeQuery()) {
-            // Automatically maps the filtered ResultSet to your JTable
-            table.setModel(DbUtils.resultSetToTableModel(rs));
-        }
-        
-    } catch (SQLException e) {
-        System.out.println("Error filtering data: " + e.getMessage());
-    }
-}
-    
 }

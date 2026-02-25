@@ -20,20 +20,22 @@ public class UserDashboard extends javax.swing.JFrame {
         loadSessionInfo();
         loadStats();
         loadMySales();
+        // Table not editable
+        tblSales.setDefaultEditor(Object.class, null);
     }
 
     private void loadSessionInfo() {
         Session s = Session.getInstance();
-        lblWelcome.setText("Welcome back, " + s.getFname() + " " + s.getLname() + "!");
+        lblWelcome1.setText("Welcome back, " + s.getFname() + " " + s.getLname() + "!");
         lblInfo.setText("Email: " + s.getEmail() + "   |   Role: User   |   Status: " + s.getStatus());
-        lblSession.setText("👤 " + s.getFname() + " " + s.getLname() + "  |  User");
+        lblSession.setText(s.getFname() + " " + s.getLname() + "  |  User");
     }
 
     private void loadStats() {
         int uid = Session.getInstance().getId();
         try (java.sql.Connection conn = config.connectDB();
              java.sql.PreparedStatement ps = conn.prepareStatement(
-                "SELECT COUNT(*), COALESCE(SUM(total_amount),0) FROM tbl_sale WHERE user_id = ?")) {
+                "SELECT COUNT(*), COALESCE(SUM(total_amount),0) FROM tbl_sale WHERE user_id=?")) {
             ps.setInt(1, uid);
             java.sql.ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -47,16 +49,12 @@ public class UserDashboard extends javax.swing.JFrame {
     private void loadMySales() {
         int uid = Session.getInstance().getId();
         new config().displayData(
-            "SELECT s.sale_id AS 'Sale #', " +
-            "b.buyer_fname || ' ' || b.buyer_lname AS 'Buyer', " +
-            "s.sale_date AS 'Date', " +
-            "s.total_amount AS 'Total (₱)', " +
-            "s.payment_status AS 'Payment Status' " +
-            "FROM tbl_sale s " +
-            "JOIN tbl_buyer b ON s.buyer_id = b.buyer_id " +
-            "WHERE s.user_id = ? " +
-            "ORDER BY s.sale_id DESC",
+            "SELECT s.sale_id AS 'Sale #', b.buyer_fname||' '||b.buyer_lname AS 'Buyer', " +
+            "s.sale_date AS 'Date', s.total_amount AS 'Total (₱)', s.payment_status AS 'Payment Status' " +
+            "FROM tbl_sale s JOIN tbl_buyer b ON s.buyer_id=b.buyer_id " +
+            "WHERE s.user_id=? ORDER BY s.sale_id DESC",
             tblSales, uid);
+        tblSales.setDefaultEditor(Object.class, null);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -72,9 +70,9 @@ public class UserDashboard extends javax.swing.JFrame {
         lblWelcome = new javax.swing.JLabel();
         lblWelcome1 = new javax.swing.JLabel();
         lblInfo = new javax.swing.JLabel();
+        lblSession = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSales = new javax.swing.JTable();
-        lblSession = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblStatTx = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -114,24 +112,31 @@ public class UserDashboard extends javax.swing.JFrame {
         });
         jPanel2.add(btnNewSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 130, 20));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 400));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 600));
 
+        sjkc.setBackground(new java.awt.Color(0, 51, 102));
         sjkc.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        sjkc.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 470, -1));
+        sjkc.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 470, 30));
 
-        lblWelcome.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblWelcome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblWelcome.setForeground(new java.awt.Color(255, 255, 255));
         lblWelcome.setText("MY DASHBOARD");
-        sjkc.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        sjkc.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        lblWelcome1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblWelcome1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblWelcome1.setForeground(new java.awt.Color(255, 255, 255));
         lblWelcome1.setText("Welcome, User!");
-        sjkc.add(lblWelcome1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+        sjkc.add(lblWelcome1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
-        lblInfo.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblInfo.setForeground(new java.awt.Color(255, 255, 255));
         lblInfo.setText("Email:    |   Role: Admin   |   Status:");
-        sjkc.add(lblInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        sjkc.add(lblInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
-        jPanel1.add(sjkc, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 490, 90));
+        lblSession.setText("jLabel1");
+        sjkc.add(lblSession, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, -1));
+
+        jPanel1.add(sjkc, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 690, 120));
 
         tblSales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -151,10 +156,7 @@ public class UserDashboard extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblSales);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 250, 500, 140));
-
-        lblSession.setText("jLabel1");
-        jPanel1.add(lblSession, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, -1, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, 500, 140));
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 153));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -163,7 +165,7 @@ public class UserDashboard extends javax.swing.JFrame {
         lblStatTx.setText("TRANSACTION");
         jPanel3.add(lblStatTx, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 130, 60));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 150, 90));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 150, 90));
 
         jPanel4.setBackground(new java.awt.Color(102, 204, 0));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -171,7 +173,7 @@ public class UserDashboard extends javax.swing.JFrame {
         lblStatRev.setText("REVENUE");
         jPanel4.add(lblStatRev, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 130, 60));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 150, 90));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 150, 90));
 
         jPanel5.setBackground(new java.awt.Color(204, 204, 0));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -179,9 +181,9 @@ public class UserDashboard extends javax.swing.JFrame {
         lblStatStatus.setText("STATUS");
         jPanel5.add(lblStatStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 130, 60));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 140, 90));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 260, 140, 90));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 400));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
         pack();
         setLocationRelativeTo(null);
@@ -189,9 +191,13 @@ public class UserDashboard extends javax.swing.JFrame {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         int c = javax.swing.JOptionPane.showConfirmDialog(this,
-            "Are you sure you want to logout?", "Confirm Logout", javax.swing.JOptionPane.YES_NO_OPTION);
+            "Are you sure you want to logout?", "Confirm Logout",
+            javax.swing.JOptionPane.YES_NO_OPTION);
         if (c == javax.swing.JOptionPane.YES_OPTION) {
-            Session.clearSession(); dispose(); new LoginForm().setVisible(true);
+            Session.clearSession();
+            dispose();
+            new LoginForm().setVisible(true);
+        
         }    }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnNewSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewSaleActionPerformed
