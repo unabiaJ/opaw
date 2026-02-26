@@ -6,6 +6,7 @@
 package views;
 
 import config.config;
+import config.Session;
 
 /**
  *
@@ -18,14 +19,22 @@ public class FishTypeForm extends javax.swing.JFrame {
     public FishTypeForm() {
         initComponents();
         setLocationRelativeTo(null);
-        // Populate category combo
-        cmbCat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Saltwater", "Freshwater", "Brackish"}));
+
+        // ── REQUIRED LOGIN GUARD
+        if (!Session.requireLogin(this)) return;
+
+        // ── Populate category combo
+        cmbCat.setModel(new javax.swing.DefaultComboBoxModel<>(
+            new String[]{"Saltwater", "Freshwater", "Brackish"}));
+
         loadData("");
-        // Row click
+
+        // ── Row click → fill form
         tblFish.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) onRowClick();
         });
-        // Search wiring
+
+        // ── Search: button click OR press Enter
         jButton1.addActionListener(e -> loadData(jTextField1.getText().trim()));
         jTextField1.addActionListener(e -> loadData(jTextField1.getText().trim()));
     }
@@ -194,28 +203,31 @@ public class FishTypeForm extends javax.swing.JFrame {
 
 
     private void addRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRecordActionPerformed
-       if (txtCode.getText().trim().isEmpty() || txtName.getText().trim().isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Fish Code and Fish Name are required."); return;
+        if (txtCode.getText().trim().isEmpty() || txtName.getText().trim().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Fish Code and Fish Name are required.");
+            return;
         }
         new config().addRecord(
             "INSERT INTO tbl_fish_type (fish_code, fish_name, fish_category) VALUES (?,?,?)",
-            txtCode.getText().trim(), txtName.getText().trim(), cmbCat.getSelectedItem());
+            txtCode.getText().trim(), txtName.getText().trim(), cmbCat.getSelectedItem().toString());
         javax.swing.JOptionPane.showMessageDialog(this, "Fish type added!");
         clearForm(); loadData("");
     }//GEN-LAST:event_addRecordActionPerformed
 
     private void updateRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRecordActionPerformed
-        if (selectedId < 0) { javax.swing.JOptionPane.showMessageDialog(this, "Select a row first."); return; }
+       if (selectedId < 0) { javax.swing.JOptionPane.showMessageDialog(this, "Select a row first."); return; }
         new config().addRecord(
             "UPDATE tbl_fish_type SET fish_code=?, fish_name=?, fish_category=? WHERE fish_type_id=?",
-            txtCode.getText().trim(), txtName.getText().trim(), cmbCat.getSelectedItem(), selectedId);
+            txtCode.getText().trim(), txtName.getText().trim(),
+            cmbCat.getSelectedItem().toString(), selectedId);
         javax.swing.JOptionPane.showMessageDialog(this, "Fish type updated!");
         clearForm(); loadData("");
     }//GEN-LAST:event_updateRecordActionPerformed
 
     private void deleteRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRecordActionPerformed
         if (selectedId < 0) { javax.swing.JOptionPane.showMessageDialog(this, "Select a row first."); return; }
-        int c = javax.swing.JOptionPane.showConfirmDialog(this, "Delete this fish type?", "Confirm", javax.swing.JOptionPane.YES_NO_OPTION);
+        int c = javax.swing.JOptionPane.showConfirmDialog(this, "Delete this fish type?", "Confirm",
+            javax.swing.JOptionPane.YES_NO_OPTION);
         if (c != javax.swing.JOptionPane.YES_OPTION) return;
         new config().addRecord("DELETE FROM tbl_fish_type WHERE fish_type_id=?", selectedId);
         javax.swing.JOptionPane.showMessageDialog(this, "Fish type deleted.");

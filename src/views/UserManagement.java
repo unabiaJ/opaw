@@ -5,8 +5,8 @@
  */
 package views;
 
-
 import config.config;
+import config.Session;
 
 /**
  *
@@ -14,28 +14,31 @@ import config.config;
  */
 public class UserManagement extends javax.swing.JFrame {
 
-    private int selectedUserId = -1;   // tracks which row is selected
+    private int selectedUserId = -1;
 
     public UserManagement() {
         initComponents();
         setLocationRelativeTo(null);
 
-        // Populate combos with correct values
+        // ── REQUIRED LOGIN GUARD
+        if (!Session.requireLogin(this)) return;
+
+        // Populate combos
         cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"user", "admin"}));
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Active", "Inactive"}));
 
-        loadData("");   // load all users on open
+        loadData("");
 
-        // Row click → fill form fields
-        jTable1.getSelectionModel().addListSelectionListener(e -> {
+        // Row click → fill form
+        tblUsers.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) onRowClick();
         });
 
-        // Search: button click OR press Enter in search field
+        // Search: button click OR press Enter
         jButton1.addActionListener(e -> loadData(jTextField1.getText().trim()));
         jTextField1.addActionListener(e -> loadData(jTextField1.getText().trim()));
 
-        // Wire all buttons (the ones not wired in initComponents)
+        // Wire buttons
         Back.addActionListener(e -> BackAction());
         delete.addActionListener(e -> deleteUserAction());
         clearForm.addActionListener(e -> clearFormAction());
@@ -50,7 +53,7 @@ public class UserManagement extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblUsers = new javax.swing.JTable();
         Back = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -87,7 +90,7 @@ public class UserManagement extends javax.swing.JFrame {
         jButton1.setText("SEARCH");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, -1, 30));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -102,12 +105,12 @@ public class UserManagement extends javax.swing.JFrame {
                 "First Name", "Last Name", "Email", "Username", "Role", "Status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setHeaderValue("First Name");
-            jTable1.getColumnModel().getColumn(1).setHeaderValue("Last Name");
-            jTable1.getColumnModel().getColumn(5).setHeaderValue("Status");
+        jScrollPane1.setViewportView(tblUsers);
+        if (tblUsers.getColumnModel().getColumnCount() > 0) {
+            tblUsers.getColumnModel().getColumn(0).setResizable(false);
+            tblUsers.getColumnModel().getColumn(0).setHeaderValue("First Name");
+            tblUsers.getColumnModel().getColumn(1).setHeaderValue("Last Name");
+            tblUsers.getColumnModel().getColumn(5).setHeaderValue("Status");
         }
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 400, 140));
@@ -274,12 +277,8 @@ public class UserManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteActionPerformed
 
     private void clearFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFormActionPerformed
-        if (selectedUserId < 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Select a row first.");
-            return;
-        }
-        new UserDetails(selectedUserId).setVisible(true);
-  
+        clearFormAction();
+
                             }//GEN-LAST:event_clearFormActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
@@ -299,118 +298,76 @@ public class UserManagement extends javax.swing.JFrame {
      * Fires when user clicks a table row.
      * Reads the HIDDEN col-0 (user_id) and populates all form fields.
      */
+    
     private void onRowClick() {
-        int row = jTable1.getSelectedRow();
+        int row = tblUsers.getSelectedRow();
         if (row < 0) return;
-
-        // Column 0 is the hidden user_id — we still read it programmatically
-        selectedUserId = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
-
-        txtFname.setText(jTable1.getValueAt(row, 1).toString());
-        txtLname.setText(jTable1.getValueAt(row, 2).toString());
-        txtEmail.setText(jTable1.getValueAt(row, 3).toString());
-        txtUname.setText(jTable1.getValueAt(row, 4).toString());
-        txtPass.setText("");   // never pre-fill password for security
-        cmbRole.setSelectedItem(jTable1.getValueAt(row, 5).toString());
-        cmbStatus.setSelectedItem(jTable1.getValueAt(row, 6).toString());
+        selectedUserId = Integer.parseInt(tblUsers.getValueAt(row, 0).toString());
+        txtFname.setText(tblUsers.getValueAt(row, 1).toString());
+        txtLname.setText(tblUsers.getValueAt(row, 2).toString());
+        txtEmail.setText(tblUsers.getValueAt(row, 3).toString());
+        txtUname.setText(tblUsers.getValueAt(row, 4).toString());
+        txtPass.setText("");
+        cmbRole.setSelectedItem(tblUsers.getValueAt(row, 5).toString());
+        cmbStatus.setSelectedItem(tblUsers.getValueAt(row, 6).toString());
     }
-
 
     public void loadData(String keyword) {
         String k = "%" + keyword + "%";
-        new config().displayData("SELECT user_id AS 'ID', user_fname AS 'First Name', user_lname AS 'Last Name', "
-            + "user_email AS 'Email', username AS 'Username', type AS 'Role', user_status AS 'Status' "
-            + "FROM tbl_user "
-            + "WHERE user_fname LIKE ? OR user_lname LIKE ? OR username LIKE ? OR user_email LIKE ? "
-            + "ORDER BY user_fname",
-            jTable1, k, k, k, k);
-
-        // ── Hide ID column — width 0, cannot be resized or seen
-        if (jTable1.getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-            jTable1.getColumnModel().getColumn(0).setWidth(0);
+        new config().displayData(
+            "SELECT user_id AS 'ID', user_fname AS 'First Name', user_lname AS 'Last Name', " +
+            "user_email AS 'Email', username AS 'Username', type AS 'Role', user_status AS 'Status' " +
+            "FROM tbl_user WHERE user_fname LIKE ? OR user_lname LIKE ? OR username LIKE ? OR user_email LIKE ? " +
+            "ORDER BY user_fname",
+            tblUsers, k, k, k, k);
+        if (tblUsers.getColumnCount() > 0) {
+            tblUsers.getColumnModel().getColumn(0).setMinWidth(0);
+            tblUsers.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblUsers.getColumnModel().getColumn(0).setWidth(0);
         }
-        // ── Cells not editable by clicking
-        jTable1.setDefaultEditor(Object.class, null);
+        tblUsers.setDefaultEditor(Object.class, null);
     }
 
-    /** UPDATE helper — writes changes to tbl_user. */
     private void updateUserAction() {
-        if (selectedUserId < 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Select a row first.");
-            return;
-        }
-        String fname = txtFname.getText().trim();
-        String lname = txtLname.getText().trim();
-        String email = txtEmail.getText().trim();
-        String uname = txtUname.getText().trim();
+        if (selectedUserId < 0) { javax.swing.JOptionPane.showMessageDialog(this, "Select a row first."); return; }
+        String fname = txtFname.getText().trim(), lname = txtLname.getText().trim();
+        String email = txtEmail.getText().trim(), uname = txtUname.getText().trim();
         String pass  = txtPass.getText().trim();
-
         if (fname.isEmpty() || lname.isEmpty() || email.isEmpty() || uname.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                "First name, last name, email and username are required.");
-            return;
+            javax.swing.JOptionPane.showMessageDialog(this, "Name, email and username are required."); return;
         }
-
         if (pass.isEmpty()) {
-            // Leave password unchanged
             new config().addRecord(
-                "UPDATE tbl_user SET user_fname=?, user_lname=?, user_email=?, "
-                + "username=?, type=?, user_status=? WHERE user_id=?",
-                fname, lname, email, uname,
-                cmbRole.getSelectedItem().toString(),
-                cmbStatus.getSelectedItem().toString(),
-                selectedUserId);
+                "UPDATE tbl_user SET user_fname=?, user_lname=?, user_email=?, username=?, type=?, user_status=? WHERE user_id=?",
+                fname, lname, email, uname, cmbRole.getSelectedItem().toString(), cmbStatus.getSelectedItem().toString(), selectedUserId);
         } else {
-            // Also update password
             new config().addRecord(
-                "UPDATE tbl_user SET user_fname=?, user_lname=?, user_email=?, "
-                + "username=?, password=?, type=?, user_status=? WHERE user_id=?",
-                fname, lname, email, uname, pass,
-                cmbRole.getSelectedItem().toString(),
-                cmbStatus.getSelectedItem().toString(),
-                selectedUserId);
+                "UPDATE tbl_user SET user_fname=?, user_lname=?, user_email=?, username=?, password=?, type=?, user_status=? WHERE user_id=?",
+                fname, lname, email, uname, pass, cmbRole.getSelectedItem().toString(), cmbStatus.getSelectedItem().toString(), selectedUserId);
         }
-        javax.swing.JOptionPane.showMessageDialog(this, "User updated successfully!");
-        clearFormAction();
-        loadData("");
+        javax.swing.JOptionPane.showMessageDialog(this, "User updated!");
+        clearFormAction(); loadData("");
     }
 
-    /** DELETE helper — removes row from tbl_user. */
     private void deleteUserAction() {
-        if (selectedUserId < 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Select a row first.");
-            return;
-        }
-        int c = javax.swing.JOptionPane.showConfirmDialog(this,
-            "Are you sure you want to delete this user?", "Confirm Delete",
-            javax.swing.JOptionPane.YES_NO_OPTION);
+        if (selectedUserId < 0) { javax.swing.JOptionPane.showMessageDialog(this, "Select a row first."); return; }
+        int c = javax.swing.JOptionPane.showConfirmDialog(this, "Delete this user?", "Confirm", javax.swing.JOptionPane.YES_NO_OPTION);
         if (c != javax.swing.JOptionPane.YES_OPTION) return;
-
         new config().addRecord("DELETE FROM tbl_user WHERE user_id=?", selectedUserId);
-        javax.swing.JOptionPane.showMessageDialog(this, "User deleted successfully.");
-        clearFormAction();
-        loadData("");
+        javax.swing.JOptionPane.showMessageDialog(this, "User deleted.");
+        clearFormAction(); loadData("");
     }
 
-    /** Resets form fields and clears table selection. */
     private void clearFormAction() {
         selectedUserId = -1;
         txtFname.setText(""); txtLname.setText(""); txtEmail.setText("");
         txtUname.setText(""); txtPass.setText("");
-        cmbRole.setSelectedIndex(0);
-        cmbStatus.setSelectedIndex(0);
-        jTable1.clearSelection();
+        cmbRole.setSelectedIndex(0); cmbStatus.setSelectedIndex(0);
+        tblUsers.clearSelection();
     }
 
-    /** Back-navigate helper (also called from constructor lambda). */
-    private void BackAction() {
-        dispose();
-        new AdminDashboard().setVisible(true);
-    }
+    private void BackAction() { dispose(); new AdminDashboard().setVisible(true); }
 
-    
     public static void main(String args[]) {
         try { for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) { if ("Nimbus".equals(info.getName())) { javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } } catch (Exception ex) { }
         java.awt.EventQueue.invokeLater(() -> new UserManagement().setVisible(true));
@@ -438,8 +395,8 @@ public class UserManagement extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblUsers;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFname;
     private javax.swing.JTextField txtLname;

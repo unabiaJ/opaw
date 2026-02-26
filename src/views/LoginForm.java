@@ -15,12 +15,11 @@ import java.sql.*;
  */
 public class LoginForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LoginForm
-     */
     public LoginForm() {
         initComponents();
         setLocationRelativeTo(null);
+        // Allow pressing Enter in password field to trigger login
+        txtPassword.addActionListener(e -> btnLoginActionPerformed(null));
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -108,16 +107,9 @@ public class LoginForm extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-        try { for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) { 
-            if ("Nimbus".equals(info.getName())) { 
-                javax.swing.UIManager.setLookAndFeel(info.getClassName()); 
-                break; 
-            } 
-        } 
-        } 
-        catch (Exception ex) { 
-        }
+        try { for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) { if ("Nimbus".equals(info.getName())) { javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } } catch (Exception ex) { }
         java.awt.EventQueue.invokeLater(() -> new LoginForm().setVisible(true));
+    
     
     }//GEN-LAST:event_btnRegisterActionPerformed
 
@@ -130,21 +122,26 @@ public class LoginForm extends javax.swing.JFrame {
             return;
         }
 
-        try (java.sql.Connection conn = config.connectDB();
-             java.sql.PreparedStatement ps = conn.prepareStatement(
+        try (Connection conn = config.connectDB();
+             PreparedStatement pstmt = conn.prepareStatement(
                 "SELECT * FROM tbl_user WHERE username = ? AND password = ?")) {
-            ps.setString(1, username);
-            ps.setString(2, password);
-            java.sql.ResultSet rs = ps.executeQuery();
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            ResultSet rs = pstmt.executeQuery();
+
             if (!rs.next()) {
                 lblStatus.setText("⚠  Invalid username or password.");
                 return;
             }
+
+            // ── Check account status
             if ("Inactive".equalsIgnoreCase(rs.getString("user_status"))) {
                 lblStatus.setText("⚠  Account is inactive. Contact admin.");
                 return;
             }
-            // Save session
+
+            // ── Save full session including type
             Session s = Session.getInstance();
             s.setId(rs.getInt("user_id"));
             s.setFname(rs.getString("user_fname"));
@@ -152,15 +149,18 @@ public class LoginForm extends javax.swing.JFrame {
             s.setEmail(rs.getString("user_email"));
             s.setUsername(rs.getString("username"));
             s.setStatus(rs.getString("user_status"));
-            s.setType(rs.getString("type"));
+            s.setType(rs.getString("type"));            // ← CRITICAL: must be saved
 
             dispose();
-            if ("admin".equalsIgnoreCase(rs.getString("type"))) {
+
+            // ── Route by role
+            if ("admin".equalsIgnoreCase(s.getType())) {
                 new AdminDashboard().setVisible(true);
             } else {
                 new UserDashboard().setVisible(true);
             }
-        } catch (java.sql.SQLException ex) {
+
+        } catch (SQLException ex) {
             lblStatus.setText("⚠  DB Error: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnLoginActionPerformed

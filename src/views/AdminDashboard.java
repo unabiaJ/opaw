@@ -5,7 +5,6 @@
  */
 package views;
 
-import config.config;
 import config.Session;
 
 /**
@@ -17,7 +16,17 @@ public class AdminDashboard extends javax.swing.JFrame {
     public AdminDashboard() {
         initComponents();
         setLocationRelativeTo(null);
+
+        // ── REQUIRED LOGIN GUARD
+        if (!Session.requireLogin(this)) return;
+
         loadWelcome();
+
+        // ── Wire sidebar buttons that had no listener in initComponents
+        btnUserMgmt.addActionListener(e -> { dispose(); new UserManagement().setVisible(true); });
+        btnFishType.addActionListener(e -> { dispose(); new FishTypeForm().setVisible(true); });
+        btnBuyers.addActionListener(e ->   { dispose(); new BuyerForm().setVisible(true); });
+        btnSales.addActionListener(e ->    { dispose(); new SalesHistory().setVisible(true); });
     }
 
     private void loadWelcome() {
@@ -162,6 +171,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             Session.clearSession();
             dispose();
             new LoginForm().setVisible(true);
+        
         
         }    }//GEN-LAST:event_btnLogoutActionPerformed
 

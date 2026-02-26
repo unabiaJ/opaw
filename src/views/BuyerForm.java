@@ -6,6 +6,7 @@
 package views;
 
 import config.config;
+import config.Session;
 
 /**
  *
@@ -18,15 +19,24 @@ public class BuyerForm extends javax.swing.JFrame {
     public BuyerForm() {
         initComponents();
         setLocationRelativeTo(null);
-        // Populate combos with correct values
-        cmbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Wholesale","Retail","Individual"}));
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Active","Inactive"}));
+
+        // ── REQUIRED LOGIN GUARD
+        if (!Session.requireLogin(this)) return;
+
+        // ── Populate combos
+        cmbType.setModel(new javax.swing.DefaultComboBoxModel<>(
+            new String[]{"Wholesale", "Retail", "Individual"}));
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(
+            new String[]{"Active", "Inactive"}));
+
         loadData("");
-        // Row click
+
+        // ── Row click → fill form
         tblBuyers.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) onRowClick();
         });
-        // Search wiring
+
+        // ── Search: button click OR press Enter
         jButton1.addActionListener(e -> loadData(jTextField1.getText().trim()));
         jTextField1.addActionListener(e -> loadData(jTextField1.getText().trim()));
     }
@@ -275,15 +285,17 @@ public class BuyerForm extends javax.swing.JFrame {
     }//GEN-LAST:event_updateRecordActionPerformed
 
     private void addRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRecordActionPerformed
-        String fname = txtFname.getText().trim();
-        String lname = txtLname.getText().trim();
-        if (fname.isEmpty() || lname.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "First Name and Last Name are required."); return;
+        if (txtFname.getText().trim().isEmpty() || txtLname.getText().trim().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "First name and last name are required.");
+            return;
         }
         new config().addRecord(
-            "INSERT INTO tbl_buyer (buyer_fname,buyer_lname,buyer_contact,buyer_address,buyer_email,buyer_type,buyer_status) VALUES (?,?,?,?,?,?,?)",
-            fname, lname, txtContact.getText().trim(), txtAddress.getText().trim(),
-            txtEmail.getText().trim(), cmbType.getSelectedItem(), cmbStatus.getSelectedItem());
+            "INSERT INTO tbl_buyer (buyer_fname, buyer_lname, buyer_contact, buyer_address, buyer_email, buyer_type, buyer_status) VALUES (?,?,?,?,?,?,?)",
+            txtFname.getText().trim(), txtLname.getText().trim(),
+            txtContact.getText().trim(), txtAddress.getText().trim(),
+            txtEmail.getText().trim(),
+            cmbType.getSelectedItem().toString(),
+            cmbStatus.getSelectedItem().toString());
         javax.swing.JOptionPane.showMessageDialog(this, "Buyer added!");
         clearForm(); loadData("");
     }//GEN-LAST:event_addRecordActionPerformed

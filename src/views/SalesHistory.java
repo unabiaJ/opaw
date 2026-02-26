@@ -17,17 +17,26 @@ public class SalesHistory extends javax.swing.JFrame {
     public SalesHistory() {
         initComponents();
         setLocationRelativeTo(null);
+
+        // ── REQUIRED LOGIN GUARD
+        if (!Session.requireLogin(this)) return;
+
         loadSales("");
-        // Row click: load items for selected sale
+
+        // ── Row click → load sale items
         tblSales.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) loadItemsForSale();
         });
-        // Wire search
+
+        // ── Search: button click OR press Enter
         btnSearch.addActionListener(e -> loadSales(txtSearch.getText().trim()));
         txtSearch.addActionListener(e -> loadSales(txtSearch.getText().trim()));
-        // Table cells not editable
-        tblSales.setDefaultEditor(Object.class, null);
-        tblItems.setDefaultEditor(Object.class, null);
+
+        // ── New Sale button
+        addUser.addActionListener(e -> {
+            dispose();
+            new SalesForm().setVisible(true);
+        });
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -169,8 +178,9 @@ public class SalesHistory extends javax.swing.JFrame {
             new UserDashboard().setVisible(true); 
     }//GEN-LAST:event_backActionPerformed
     
-    public void loadSales(String kw) {
+     public void loadSales(String kw) {
         String k = "%" + kw + "%";
+        // Sales table has no hidden ID — sale_id IS shown as col 0 (Sale #)
         if ("admin".equalsIgnoreCase(Session.getInstance().getType())) {
             new config().displayData(
                 "SELECT s.sale_id AS 'Sale #', " +
@@ -180,7 +190,8 @@ public class SalesHistory extends javax.swing.JFrame {
                 "FROM tbl_sale s " +
                 "JOIN tbl_user u ON s.user_id=u.user_id " +
                 "JOIN tbl_buyer b ON s.buyer_id=b.buyer_id " +
-                "WHERE b.buyer_fname LIKE ? OR b.buyer_lname LIKE ? OR s.sale_date LIKE ? OR s.payment_status LIKE ? " +
+                "WHERE b.buyer_fname LIKE ? OR b.buyer_lname LIKE ? " +
+                "OR s.sale_date LIKE ? OR s.payment_status LIKE ? " +
                 "ORDER BY s.sale_id DESC",
                 tblSales, k, k, k, k);
         } else {
@@ -198,25 +209,29 @@ public class SalesHistory extends javax.swing.JFrame {
         tblSales.setDefaultEditor(Object.class, null);
     }
 
+    /** Fires when a row in tblSales is clicked — loads its items below. */
     private void loadItemsForSale() {
         int row = tblSales.getSelectedRow();
         if (row < 0) return;
+
+        // Col 0 = Sale # (visible, used as the ID)
         int saleId = Integer.parseInt(tblSales.getValueAt(row, 0).toString());
+
         new config().displayData(
             "SELECT f.fish_name AS 'Fish Type', si.quantity_kg AS 'Qty (kg)', " +
             "si.price_per_kg AS 'Price/kg', si.subtotal AS 'Subtotal (₱)' " +
-            "FROM tbl_sale_item si JOIN tbl_fish_type f ON si.fish_type_id=f.fish_type_id " +
-            "WHERE si.sale_id=?",
+            "FROM tbl_sale_item si " +
+            "JOIN tbl_fish_type f ON si.fish_type_id = f.fish_type_id " +
+            "WHERE si.sale_id = ?",
             tblItems, saleId);
         tblItems.setDefaultEditor(Object.class, null);
 
-        // Show buyer and total in labels
-        int buyerCol = "admin".equalsIgnoreCase(Session.getInstance().getType()) ? 2 : 1;
-        int totalCol = "admin".equalsIgnoreCase(Session.getInstance().getType()) ? 4 : 3;
-        String buyer = tblSales.getValueAt(row, buyerCol).toString();
-        String total = tblSales.getValueAt(row, totalCol).toString();
+        // Update labels — find buyer and total columns safely
+        int colCount = tblSales.getColumnCount();
+        String total = tblSales.getValueAt(row, colCount - 2).toString();
+        String buyer = tblSales.getValueAt(row, colCount - 3).toString();
         lblItemsTitle.setText("Items for Sale #" + saleId + "  —  Buyer: " + buyer);
-        lblItemTotal.setText("  TOTAL:  ₱ " + total + "  ");
+        lblItemTotal.setText("  TOTAL:  ₱ " + total + "   ");
     }
 
     public static void main(String args[]) {
