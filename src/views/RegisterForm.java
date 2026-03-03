@@ -8,8 +8,10 @@ package views;
 import config.config;
 
 /**
+ * RegisterForm — Self-registration form.
+ * Accounts created here are set to "Pending" and require admin approval before login.
  *
- * @author Administrator
+ * @author Administrator (updated)
  */
 public class RegisterForm extends javax.swing.JFrame {
 
@@ -33,7 +35,6 @@ public class RegisterForm extends javax.swing.JFrame {
         txtLname = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtConfirm = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
         btnRegister = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
         txtPassword1 = new javax.swing.JPasswordField();
@@ -41,6 +42,7 @@ public class RegisterForm extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -90,14 +92,6 @@ public class RegisterForm extends javax.swing.JFrame {
         jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 470, 40));
         jPanel1.add(txtConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 450, 470, 40));
 
-        jButton1.setText("GO BACK LOGIN");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, 210, 40));
-
         btnRegister.setText("REGISTER");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,6 +120,14 @@ public class RegisterForm extends javax.swing.JFrame {
         jLabel9.setText("Sign up to your Account");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, -1, -1));
 
+        btnBack.setText("GO BACK LOGIN");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
         pack();
@@ -147,7 +149,8 @@ public class RegisterForm extends javax.swing.JFrame {
         String password = new String(txtPassword1.getPassword()).trim();
         String confirm  = new String(txtConfirm.getPassword()).trim();
 
-        if (fname.isEmpty() || lname.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
+        if (fname.isEmpty() || lname.isEmpty() || email.isEmpty()
+                || username.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
             lblStatus.setText("⚠  All fields are required."); return;
         }
         if (!email.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
@@ -156,6 +159,8 @@ public class RegisterForm extends javax.swing.JFrame {
         if (!password.equals(confirm)) {
             lblStatus.setText("⚠  Passwords do not match."); return;
         }
+
+        // Check for duplicate email/username
         try (java.sql.Connection conn = config.connectDB();
              java.sql.PreparedStatement chk = conn.prepareStatement(
                 "SELECT COUNT(*) FROM tbl_user WHERE user_email=? OR username=?")) {
@@ -167,21 +172,27 @@ public class RegisterForm extends javax.swing.JFrame {
         } catch (java.sql.SQLException ex) {
             lblStatus.setText("⚠  Error: " + ex.getMessage()); return;
         }
+
+        // ── STATUS = "Pending" — requires admin approval
         new config().addRecord(
-            "INSERT INTO tbl_user (user_fname,user_lname,user_email,username,password,type,user_status) VALUES (?,?,?,?,?,'user','Active')",
+            "INSERT INTO tbl_user (user_fname,user_lname,user_email,username,password,type,user_status) VALUES (?,?,?,?,?,'user','Pending')",
             fname, lname, email, username, password);
-        javax.swing.JOptionPane.showMessageDialog(this, "Registration successful! You can now login.");
+
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "Registration successful!\n\n" +
+            "Your account is PENDING approval by the administrator.\n" +
+            "Please contact the admin to activate your account before logging in.",
+            "Registration Submitted", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
         dispose();
         new LoginForm().setVisible(true);
-            }//GEN-LAST:event_btnRegisterActionPerformed
+    }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
-        new LoginForm().setVisible(true);    }//GEN-LAST:event_jButton1ActionPerformed
+        new LoginForm().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -190,24 +201,24 @@ public class RegisterForm extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RegisterForm().setVisible(true);
-            }
-        });
-    }
+        } catch (Exception ex) { }
+        java.awt.EventQueue.invokeLater(() -> new RegisterForm().setVisible(true));
+    
+
+            }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        dispose();
+        new LoginForm().setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRegister;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -10,15 +10,16 @@ import config.Session;
 import java.sql.*;
 
 /**
+ * LoginForm — handles login with account-status checks.
+ * Accounts with status "Pending" are blocked until admin approves.
  *
- * @author Administrator
+ * @author Administrator (updated)
  */
 public class LoginForm extends javax.swing.JFrame {
 
     public LoginForm() {
         initComponents();
         setLocationRelativeTo(null);
-        // Allow pressing Enter in password field to trigger login
         txtPassword.addActionListener(e -> btnLoginActionPerformed(null));
     }
     @SuppressWarnings("unchecked")
@@ -107,9 +108,15 @@ public class LoginForm extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-        try { for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) { if ("Nimbus".equals(info.getName())) { javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } } catch (Exception ex) { }
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception ex) { }
         java.awt.EventQueue.invokeLater(() -> new LoginForm().setVisible(true));
-    
     
     }//GEN-LAST:event_btnRegisterActionPerformed
 
@@ -118,7 +125,7 @@ public class LoginForm extends javax.swing.JFrame {
         String password = new String(txtPassword.getPassword()).trim();
 
         if (username.isEmpty() || password.isEmpty()) {
-            lblStatus.setText("⚠  Username and password are required.");
+            lblStatus.setText("  Username and password are required.");
             return;
         }
 
@@ -131,17 +138,36 @@ public class LoginForm extends javax.swing.JFrame {
             ResultSet rs = pstmt.executeQuery();
 
             if (!rs.next()) {
-                lblStatus.setText("⚠  Invalid username or password.");
+                lblStatus.setText("  Invalid username or password.");
                 return;
             }
 
-            // ── Check account status
-            if ("Inactive".equalsIgnoreCase(rs.getString("user_status"))) {
-                lblStatus.setText("⚠  Account is inactive. Contact admin.");
+            String status = rs.getString("user_status");
+
+            // PENDING check - blocks login and shows contact-admin message
+            if ("Pending".equalsIgnoreCase(status)) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                    "Your account is PENDING approval.\n\n" +
+                    "Your registration has been received, but an administrator\n" +
+                    "must approve your account before you can log in.\n\n" +
+                    "Please contact the admin for assistance.",
+                    "Account Pending Approval",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                lblStatus.setText("  Account pending. Please contact admin for approval.");
                 return;
             }
 
-            // ── Save full session including type
+            // INACTIVE check
+            if ("Inactive".equalsIgnoreCase(status)) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                    "Your account has been deactivated.\nPlease contact the administrator.",
+                    "Account Inactive",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                lblStatus.setText("  Account is inactive. Contact admin.");
+                return;
+            }
+
+            // Save session
             Session s = Session.getInstance();
             s.setId(rs.getInt("user_id"));
             s.setFname(rs.getString("user_fname"));
@@ -149,11 +175,10 @@ public class LoginForm extends javax.swing.JFrame {
             s.setEmail(rs.getString("user_email"));
             s.setUsername(rs.getString("username"));
             s.setStatus(rs.getString("user_status"));
-            s.setType(rs.getString("type"));            // ← CRITICAL: must be saved
+            s.setType(rs.getString("type"));
 
             dispose();
 
-            // ── Route by role
             if ("admin".equalsIgnoreCase(s.getType())) {
                 new AdminDashboard().setVisible(true);
             } else {
@@ -161,7 +186,7 @@ public class LoginForm extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            lblStatus.setText("⚠  DB Error: " + ex.getMessage());
+            lblStatus.setText("  DB Error: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

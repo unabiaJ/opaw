@@ -65,6 +65,7 @@ public class UserDashboard extends javax.swing.JFrame {
         btnProfile = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         btnNewSale = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         sjkc = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         lblWelcome = new javax.swing.JLabel();
@@ -112,6 +113,14 @@ public class UserDashboard extends javax.swing.JFrame {
         });
         jPanel2.add(btnNewSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 130, 20));
 
+        jButton1.setText("SALE HISTORY");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 130, -1));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 600));
 
         sjkc.setBackground(new java.awt.Color(0, 51, 102));
@@ -156,7 +165,7 @@ public class UserDashboard extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblSales);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, 500, 140));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 500, 140));
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 153));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -165,7 +174,7 @@ public class UserDashboard extends javax.swing.JFrame {
         lblStatTx.setText("TRANSACTION");
         jPanel3.add(lblStatTx, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 130, 60));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 150, 90));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 150, 90));
 
         jPanel4.setBackground(new java.awt.Color(102, 204, 0));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -173,7 +182,7 @@ public class UserDashboard extends javax.swing.JFrame {
         lblStatRev.setText("REVENUE");
         jPanel4.add(lblStatRev, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 130, 60));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 150, 90));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, 150, 90));
 
         jPanel5.setBackground(new java.awt.Color(204, 204, 0));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -181,7 +190,7 @@ public class UserDashboard extends javax.swing.JFrame {
         lblStatStatus.setText("STATUS");
         jPanel5.add(lblStatStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 130, 60));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 260, 140, 90));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, 140, 90));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
@@ -210,6 +219,11 @@ public class UserDashboard extends javax.swing.JFrame {
         EditProfileForm profileForm = new EditProfileForm();
         profileForm.setVisible(true);    }//GEN-LAST:event_btnProfileActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        SalesHistory history = new SalesHistory();
+        history.setVisible(true);    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -222,6 +236,7 @@ public class UserDashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnNewSale;
     private javax.swing.JButton btnProfile;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

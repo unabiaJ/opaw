@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views;
 
 import config.config;
@@ -10,25 +5,30 @@ import config.Session;
 import java.util.ArrayList;
 
 /**
+ * SalesForm — create a new sale transaction.
+ * After saving, shows a ReceiptForm automatically.
  *
- * @author Administrator
+ * @author Administrator (updated - added receipt display)
  */
 public class SalesForm extends javax.swing.JFrame {
 
     // Each item: [fish_type_id, fish_name, qty, price, subtotal]
     private ArrayList<Object[]> items = new ArrayList<>();
+    private int lastSaleId = -1;   // stores ID of the most recently saved sale
 
     public SalesForm() {
         initComponents();
         setLocationRelativeTo(null);
         loadBuyers();
         loadFishTypes();
-        // Auto-fill today's date
         java.time.LocalDate today = java.time.LocalDate.now();
         txtDate.setText(today.format(java.time.format.DateTimeFormatter.ofPattern("MM-dd-yy")));
         updateTotal();
-        // Table not editable
         tblItems.setDefaultEditor(Object.class, null);
+
+        // Hide until a sale is saved
+        btnReceipt.setVisible(false);
+        lblSaved.setVisible(false);
     }
 
     private void loadBuyers() {
@@ -54,7 +54,7 @@ public class SalesForm extends javax.swing.JFrame {
     private void updateTotal() {
         double total = 0;
         for (Object[] r : items) total += (Double) r[4];
-        lblTotal.setText(String.format("  TOTAL:  ₱ %.2f  ", total));
+        lblTotal.setText(String.format("  TOTAL:  Ph %.2f  ", total));
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -86,6 +86,8 @@ public class SalesForm extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         cmbBuyer = new javax.swing.JComboBox<>();
         cmbPayment = new javax.swing.JComboBox<>();
+        btnReceipt = new javax.swing.JButton();
+        lblSaved = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -227,6 +229,18 @@ public class SalesForm extends javax.swing.JFrame {
         cmbPayment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paid", "Unpaid", " " }));
         jPanel1.add(cmbPayment, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 126, 200, 30));
 
+        btnReceipt.setBackground(new java.awt.Color(0, 102, 255));
+        btnReceipt.setText("VIEW RECEIPT");
+        btnReceipt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReceiptActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnReceipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 420, -1));
+
+        lblSaved.setText("SAVE ANOTHER");
+        jPanel1.add(lblSaved, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 540, 180, 40));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
         pack();
@@ -250,8 +264,7 @@ public class SalesForm extends javax.swing.JFrame {
             { dispose(); new UserDashboard().setVisible(true); }    }//GEN-LAST:event_goBackActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-    
-        if (cmbBuyer.getSelectedItem() == null || cmbBuyer.getSelectedItem().toString().isEmpty()) {
+      if (cmbBuyer.getSelectedItem() == null || cmbBuyer.getSelectedItem().toString().isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Please select a buyer."); return;
         }
         if (items.isEmpty()) {
@@ -288,19 +301,26 @@ public class SalesForm extends javax.swing.JFrame {
             }
             ps2.executeBatch();
             conn.commit();
-            javax.swing.JOptionPane.showMessageDialog(this, "Transaction saved successfully!");
+
+            // ── Show receipt automatically after saving
+            javax.swing.JOptionPane.showMessageDialog(this, "Transaction saved! Opening receipt...");
+            final int finalSaleId = saleId;
             dispose();
+            // Go back to appropriate dashboard AND open receipt
             if ("admin".equalsIgnoreCase(Session.getInstance().getType()))
                 new SalesHistory().setVisible(true);
             else
                 new UserDashboard().setVisible(true);
+            // Open receipt window
+            new ReceiptForm(finalSaleId).setVisible(true);
+
         } catch (java.sql.SQLException ex) {
             javax.swing.JOptionPane.showMessageDialog(this, "Error saving: " + ex.getMessage());
         }
             }//GEN-LAST:event_saveActionPerformed
 
     private void addItemToListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemToListActionPerformed
-        String fishSel = (String) cmbFish.getSelectedItem();
+      String fishSel = (String) cmbFish.getSelectedItem();
         if (fishSel == null || fishSel.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Please select a fish type."); return;
         }
@@ -324,6 +344,8 @@ public class SalesForm extends javax.swing.JFrame {
         m.addRow(new Object[]{fishName, qty, price, String.format("%.2f", sub)});
 
         txtQty.setText(""); txtPrice.setText("");
+        
+    
        
         updateTotal();        updateTotal();    }//GEN-LAST:event_addItemToListActionPerformed
 
@@ -335,6 +357,14 @@ public class SalesForm extends javax.swing.JFrame {
        
         updateTotal();    }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void btnReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReceiptActionPerformed
+        if (lastSaleId < 1) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "No saved sale to view. Save a transaction first.");
+            return;
+        }
+        new ReceiptForm(lastSaleId).setVisible(true);    }//GEN-LAST:event_btnReceiptActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -342,9 +372,9 @@ public class SalesForm extends javax.swing.JFrame {
         try { for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) { if ("Nimbus".equals(info.getName())) { javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } } catch (Exception ex) { }
         java.awt.EventQueue.invokeLater(() -> new SalesForm().setVisible(true));
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addItemToList;
+    private javax.swing.JButton btnReceipt;
     private javax.swing.JComboBox<String> cmbBuyer;
     private javax.swing.JComboBox<String> cmbFish;
     private javax.swing.JComboBox<String> cmbPayment;
@@ -364,6 +394,7 @@ public class SalesForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblSaved;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JButton save;
     private javax.swing.JTable tblItems;

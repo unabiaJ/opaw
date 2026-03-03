@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views;
 
 import config.config;
 import config.Session;
 
 /**
- *
- * @author Administrator
+ * @author Administrator (updated — Pending-first enforcement)
  */
 public class UserManagement extends javax.swing.JFrame {
 
@@ -20,29 +14,25 @@ public class UserManagement extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
-        // ── REQUIRED LOGIN GUARD
         if (!Session.requireLogin(this)) return;
 
-        // Populate combos
-        cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"user", "admin"}));
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Active", "Inactive"}));
+        // Role and status combos
+        cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(
+                new String[]{"user", "admin"}));
+        // Status combo used for UPDATE only (ADD always forces Pending)
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(
+                new String[]{"Active", "Inactive", "Pending"}));
 
         loadData("");
 
-        // Row click → fill form
+        // Row selection
         tblUsers.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) onRowClick();
         });
 
-        // Search: button click OR press Enter
+        // Search
         jButton1.addActionListener(e -> loadData(jTextField1.getText().trim()));
         jTextField1.addActionListener(e -> loadData(jTextField1.getText().trim()));
-
-        // Wire buttons
-        Back.addActionListener(e -> BackAction());
-        delete.addActionListener(e -> deleteUserAction());
-        clearForm.addActionListener(e -> clearFormAction());
-        update.addActionListener(e -> updateUserAction());
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -54,7 +44,6 @@ public class UserManagement extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsers = new javax.swing.JTable();
-        Back = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
@@ -77,10 +66,16 @@ public class UserManagement extends javax.swing.JFrame {
         cmbStatus = new javax.swing.JComboBox<>();
         cmbRole = new javax.swing.JComboBox<>();
         btnView = new javax.swing.JButton();
+        btnApprove = new javax.swing.JButton();
+        lblPendingCount = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Search:");
@@ -115,14 +110,6 @@ public class UserManagement extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 400, 140));
 
-        Back.setText("BACK TO DASHBOARD");
-        Back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackActionPerformed(evt);
-            }
-        });
-        jPanel1.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, -1, -1));
-
         jPanel3.setBackground(new java.awt.Color(0, 102, 153));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 350, 30));
@@ -131,8 +118,8 @@ public class UserManagement extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("USER MANAGEMENT");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-        jPanel3.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 200, 30));
-        jPanel3.add(txtFname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 200, 30));
+        jPanel3.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 200, 30));
+        jPanel3.add(txtFname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 200, 30));
 
         addRecord.setBackground(new java.awt.Color(0, 153, 51));
         addRecord.setText("ADD");
@@ -172,9 +159,9 @@ public class UserManagement extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("First Name:");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
-        jPanel3.add(txtUname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 200, 30));
-        jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 200, 30));
-        jPanel3.add(txtLname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 200, 30));
+        jPanel3.add(txtUname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 200, 30));
+        jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 200, 30));
+        jPanel3.add(txtLname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 200, 30));
 
         clearForm.setBackground(new java.awt.Color(204, 204, 204));
         clearForm.setText("CLEAR");
@@ -202,20 +189,49 @@ public class UserManagement extends javax.swing.JFrame {
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(cmbStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 200, 30));
+        jPanel3.add(cmbStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 200, 30));
 
         cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(cmbRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 200, 30));
+        jPanel3.add(cmbRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 200, 30));
 
-        btnView.setText("View Details");
+        btnView.setText("VIEW DETAILS");
         btnView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewActionPerformed(evt);
             }
         });
-        jPanel3.add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 330, -1));
+        jPanel3.add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, 160, 30));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 370, 480));
+        btnApprove.setText("APPROVE USER");
+        btnApprove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApproveActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnApprove, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 160, 30));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 370, 490));
+
+        lblPendingCount.setText("jLabel10");
+        jPanel1.add(lblPendingCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 400, 20));
+
+        jPanel2.setBackground(new java.awt.Color(0, 51, 102));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("MANAGE USERS");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        Back.setText("BACK TO DASHBOARD");
+        Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, -1, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 90));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
@@ -229,43 +245,7 @@ public class UserManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_BackActionPerformed
 
     private void addRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRecordActionPerformed
-        String fname = txtFname.getText().trim();
-        String lname = txtLname.getText().trim();
-        String email = txtEmail.getText().trim();
-        String uname = txtUname.getText().trim();
-        String pass  = txtPass.getText().trim();
-
-        if (fname.isEmpty() || lname.isEmpty() || email.isEmpty()
-                || uname.isEmpty() || pass.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "All fields are required.");
-            return;
-        }
-
-        // Check for duplicate username
-        try (java.sql.Connection conn = config.connectDB();
-             java.sql.PreparedStatement chk = conn.prepareStatement(
-                "SELECT COUNT(*) FROM tbl_user WHERE username = ?")) {
-            chk.setString(1, uname);
-            java.sql.ResultSet rs = chk.executeQuery();
-            if (rs.next() && rs.getInt(1) > 0) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Username already exists.");
-                return;
-            }
-        } catch (java.sql.SQLException ex) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
-            return;
-        }
-
-        new config().addRecord(
-            "INSERT INTO tbl_user (user_fname, user_lname, user_email, username, password, type, user_status) "
-            + "VALUES (?,?,?,?,?,?,?)",
-            fname, lname, email, uname, pass,
-            cmbRole.getSelectedItem().toString(),
-            cmbStatus.getSelectedItem().toString());
-
-        javax.swing.JOptionPane.showMessageDialog(this, "User added successfully!");
-        clearFormAction();
-        loadData("");
+        addUserAsPending();
     }//GEN-LAST:event_addRecordActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
@@ -288,6 +268,11 @@ public class UserManagement extends javax.swing.JFrame {
     }
     dispose();
     new UserDetails(selectedUserId).setVisible(true);    new UserDetails(selectedUserId).setVisible(true);    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
+ approveUserAction();
+
+    }//GEN-LAST:event_btnApproveActionPerformed
   
 
     // ══════════════════════════════════════════════
@@ -299,6 +284,8 @@ public class UserManagement extends javax.swing.JFrame {
      * Reads the HIDDEN col-0 (user_id) and populates all form fields.
      */
     
+
+    /** When a table row is clicked, populate form fields. */
     private void onRowClick() {
         int row = tblUsers.getSelectedRow();
         if (row < 0) return;
@@ -307,75 +294,244 @@ public class UserManagement extends javax.swing.JFrame {
         txtLname.setText(tblUsers.getValueAt(row, 2).toString());
         txtEmail.setText(tblUsers.getValueAt(row, 3).toString());
         txtUname.setText(tblUsers.getValueAt(row, 4).toString());
-        txtPass.setText("");
+        txtPass.setText("");   // never pre-fill password
         cmbRole.setSelectedItem(tblUsers.getValueAt(row, 5).toString());
         cmbStatus.setSelectedItem(tblUsers.getValueAt(row, 6).toString());
     }
 
+    /** Loads users into table. Hides col-0 (user_id). Updates pending count. */
     public void loadData(String keyword) {
         String k = "%" + keyword + "%";
         new config().displayData(
             "SELECT user_id AS 'ID', user_fname AS 'First Name', user_lname AS 'Last Name', " +
             "user_email AS 'Email', username AS 'Username', type AS 'Role', user_status AS 'Status' " +
-            "FROM tbl_user WHERE user_fname LIKE ? OR user_lname LIKE ? OR username LIKE ? OR user_email LIKE ? " +
-            "ORDER BY user_fname",
+            "FROM tbl_user " +
+            "WHERE user_fname LIKE ? OR user_lname LIKE ? OR username LIKE ? OR user_email LIKE ? " +
+            "ORDER BY CASE user_status WHEN 'Pending' THEN 0 ELSE 1 END, user_fname",
             tblUsers, k, k, k, k);
+
+        // Hide ID column
         if (tblUsers.getColumnCount() > 0) {
             tblUsers.getColumnModel().getColumn(0).setMinWidth(0);
             tblUsers.getColumnModel().getColumn(0).setMaxWidth(0);
             tblUsers.getColumnModel().getColumn(0).setWidth(0);
         }
         tblUsers.setDefaultEditor(Object.class, null);
+        updatePendingCount();
     }
 
-    private void updateUserAction() {
-        if (selectedUserId < 0) { javax.swing.JOptionPane.showMessageDialog(this, "Select a row first."); return; }
-        String fname = txtFname.getText().trim(), lname = txtLname.getText().trim();
-        String email = txtEmail.getText().trim(), uname = txtUname.getText().trim();
+    /** Shows live pending count in orange/green label. */
+    private void updatePendingCount() {
+        try (java.sql.Connection conn = config.connectDB();
+             java.sql.PreparedStatement ps = conn.prepareStatement(
+                "SELECT COUNT(*) FROM tbl_user WHERE user_status='Pending'")) {
+            java.sql.ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int n = rs.getInt(1);
+                if (n > 0) {
+                    lblPendingCount.setText("  \u26A0  " + n + " account(s) PENDING approval");
+                    lblPendingCount.setForeground(new java.awt.Color(200, 80, 0));
+                } else {
+                    lblPendingCount.setText("  \u2714  No pending accounts.");
+                    lblPendingCount.setForeground(new java.awt.Color(0, 150, 0));
+                }
+            }
+        } catch (java.sql.SQLException ex) { /* ignore */ }
+    }
+
+    /**
+     * ADD — always inserts with status = "Pending".
+     * The admin CANNOT make a new account Active directly.
+     * They must use APPROVE USER after creating it.
+     */
+    private void addUserAsPending() {
+        String fname = txtFname.getText().trim();
+        String lname = txtLname.getText().trim();
+        String email = txtEmail.getText().trim();
+        String uname = txtUname.getText().trim();
         String pass  = txtPass.getText().trim();
-        if (fname.isEmpty() || lname.isEmpty() || email.isEmpty() || uname.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Name, email and username are required."); return;
+
+        // ── Validation ────────────────────────────────────────────────────────
+        if (fname.isEmpty() || lname.isEmpty() || email.isEmpty()
+                || uname.isEmpty() || pass.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "All fields are required.");
+            return;
         }
+
+        // ── Duplicate check ───────────────────────────────────────────────────
+        try (java.sql.Connection conn = config.connectDB();
+             java.sql.PreparedStatement chk = conn.prepareStatement(
+                "SELECT COUNT(*) FROM tbl_user WHERE username=? OR user_email=?")) {
+            chk.setString(1, uname);
+            chk.setString(2, email);
+            java.sql.ResultSet rs = chk.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                    "Username or email already exists.");
+                return;
+            }
+        } catch (java.sql.SQLException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "DB Error: " + ex.getMessage());
+            return;
+        }
+
+        // ── INSERT — status is ALWAYS "Pending" regardless of cmbStatus ───────
+        new config().addRecord(
+            "INSERT INTO tbl_user " +
+            "(user_fname, user_lname, user_email, username, password, type, user_status) " +
+            "VALUES (?,?,?,?,?,?,'Pending')",
+            fname, lname, email, uname, pass,
+            cmbRole.getSelectedItem().toString());
+
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "Account created with PENDING status.\n\n" +
+            "The user CANNOT log in yet.\n" +
+            "Select the account and click APPROVE USER\nto allow them to log in.",
+            "Account Created — Pending Approval",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        clearFormAction();
+        loadData("");
+    }
+
+    /**
+     * APPROVE — sets selected Pending account to Active.
+     * Only Pending accounts can be approved.
+     */
+    private void approveUserAction() {
+        if (selectedUserId < 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a user first.");
+            return;
+        }
+
+        String currentStatus = "", fullName = "";
+        try (java.sql.Connection conn = config.connectDB();
+             java.sql.PreparedStatement ps = conn.prepareStatement(
+                "SELECT user_status, user_fname, user_lname FROM tbl_user WHERE user_id=?")) {
+            ps.setInt(1, selectedUserId);
+            java.sql.ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                currentStatus = rs.getString("user_status");
+                fullName = rs.getString("user_fname") + " " + rs.getString("user_lname");
+            }
+        } catch (java.sql.SQLException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "DB Error: " + ex.getMessage());
+            return;
+        }
+
+        if (!"Pending".equalsIgnoreCase(currentStatus)) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                fullName + "'s account is already \"" + currentStatus + "\".\n" +
+                "Only PENDING accounts can be approved here.",
+                "Cannot Approve", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int c = javax.swing.JOptionPane.showConfirmDialog(this,
+            "Approve account for " + fullName + "?\n\n" +
+            "This will set their status to ACTIVE and allow them to log in.",
+            "Confirm Approval", javax.swing.JOptionPane.YES_NO_OPTION);
+        if (c != javax.swing.JOptionPane.YES_OPTION) return;
+
+        new config().addRecord(
+            "UPDATE tbl_user SET user_status='Active' WHERE user_id=?",
+            selectedUserId);
+
+        javax.swing.JOptionPane.showMessageDialog(this,
+            fullName + "'s account is now ACTIVE.\nThey can log in.",
+            "Approved!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        clearFormAction();
+        loadData("");
+    }
+
+    /** UPDATE — allows changing any field including status (for management). */
+    private void updateUserAction() {
+        if (selectedUserId < 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Select a row first.");
+            return;
+        }
+        String fname = txtFname.getText().trim();
+        String lname = txtLname.getText().trim();
+        String email = txtEmail.getText().trim();
+        String uname = txtUname.getText().trim();
+        String pass  = txtPass.getText().trim();
+
+        if (fname.isEmpty() || lname.isEmpty() || email.isEmpty() || uname.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Name, email and username are required.");
+            return;
+        }
+
         if (pass.isEmpty()) {
             new config().addRecord(
-                "UPDATE tbl_user SET user_fname=?, user_lname=?, user_email=?, username=?, type=?, user_status=? WHERE user_id=?",
-                fname, lname, email, uname, cmbRole.getSelectedItem().toString(), cmbStatus.getSelectedItem().toString(), selectedUserId);
+                "UPDATE tbl_user SET user_fname=?, user_lname=?, user_email=?, username=?, " +
+                "type=?, user_status=? WHERE user_id=?",
+                fname, lname, email, uname,
+                cmbRole.getSelectedItem().toString(),
+                cmbStatus.getSelectedItem().toString(),
+                selectedUserId);
         } else {
             new config().addRecord(
-                "UPDATE tbl_user SET user_fname=?, user_lname=?, user_email=?, username=?, password=?, type=?, user_status=? WHERE user_id=?",
-                fname, lname, email, uname, pass, cmbRole.getSelectedItem().toString(), cmbStatus.getSelectedItem().toString(), selectedUserId);
+                "UPDATE tbl_user SET user_fname=?, user_lname=?, user_email=?, username=?, " +
+                "password=?, type=?, user_status=? WHERE user_id=?",
+                fname, lname, email, uname, pass,
+                cmbRole.getSelectedItem().toString(),
+                cmbStatus.getSelectedItem().toString(),
+                selectedUserId);
         }
-        javax.swing.JOptionPane.showMessageDialog(this, "User updated!");
-        clearFormAction(); loadData("");
+        javax.swing.JOptionPane.showMessageDialog(this, "User updated successfully!");
+        clearFormAction();
+        loadData("");
     }
 
+    /** DELETE — removes a user after confirmation. */
     private void deleteUserAction() {
-        if (selectedUserId < 0) { javax.swing.JOptionPane.showMessageDialog(this, "Select a row first."); return; }
-        int c = javax.swing.JOptionPane.showConfirmDialog(this, "Delete this user?", "Confirm", javax.swing.JOptionPane.YES_NO_OPTION);
+        if (selectedUserId < 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Select a row first.");
+            return;
+        }
+        int c = javax.swing.JOptionPane.showConfirmDialog(this,
+            "Delete this user? This cannot be undone.",
+            "Confirm Delete", javax.swing.JOptionPane.YES_NO_OPTION);
         if (c != javax.swing.JOptionPane.YES_OPTION) return;
+
         new config().addRecord("DELETE FROM tbl_user WHERE user_id=?", selectedUserId);
         javax.swing.JOptionPane.showMessageDialog(this, "User deleted.");
-        clearFormAction(); loadData("");
+        clearFormAction();
+        loadData("");
     }
 
+    /** Resets form fields and selection. */
     private void clearFormAction() {
         selectedUserId = -1;
-        txtFname.setText(""); txtLname.setText(""); txtEmail.setText("");
-        txtUname.setText(""); txtPass.setText("");
-        cmbRole.setSelectedIndex(0); cmbStatus.setSelectedIndex(0);
+        txtFname.setText("");
+        txtLname.setText("");
+        txtEmail.setText("");
+        txtUname.setText("");
+        txtPass.setText("");
+        cmbRole.setSelectedIndex(0);
+        cmbStatus.setSelectedIndex(0);
         tblUsers.clearSelection();
     }
 
-    private void BackAction() { dispose(); new AdminDashboard().setVisible(true); }
-
     public static void main(String args[]) {
-        try { for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) { if ("Nimbus".equals(info.getName())) { javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } } catch (Exception ex) { }
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception ex) { }
         java.awt.EventQueue.invokeLater(() -> new UserManagement().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
     private javax.swing.JButton addRecord;
+    private javax.swing.JButton btnApprove;
     private javax.swing.JButton btnView;
     private javax.swing.JButton clearForm;
     private javax.swing.JComboBox<String> cmbRole;
@@ -383,6 +539,7 @@ public class UserManagement extends javax.swing.JFrame {
     private javax.swing.JButton delete;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -392,10 +549,12 @@ public class UserManagement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblPendingCount;
     private javax.swing.JTable tblUsers;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFname;

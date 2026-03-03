@@ -176,7 +176,7 @@ public class EditProfileForm extends javax.swing.JFrame {
         jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         lblStatusMsg.setForeground(new java.awt.Color(0, 51, 153));
-        lblStatusMsg.setText("lblStatusMsg");
+        lblStatusMsg.setText("STATUS");
         jPanel5.add(lblStatusMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, -1, -1));
 
         lblValType.addActionListener(new java.awt.event.ActionListener() {
