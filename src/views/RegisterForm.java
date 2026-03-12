@@ -43,6 +43,7 @@ public class RegisterForm extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -98,9 +99,7 @@ public class RegisterForm extends javax.swing.JFrame {
                 btnRegisterActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 520, 210, 40));
-
-        lblStatus.setText("All fields are required.");
+        jPanel1.add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 520, 230, 40));
         jPanel1.add(lblStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 570, -1, -1));
         jPanel1.add(txtPassword1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 470, 40));
 
@@ -126,7 +125,11 @@ public class RegisterForm extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, -1, -1));
+        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, 220, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
@@ -205,7 +208,7 @@ public class RegisterForm extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new RegisterForm().setVisible(true));
     
 
-            }//GEN-LAST:event_btnRegisterActionPerformed
+            }                                           
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         dispose();
@@ -219,6 +222,7 @@ public class RegisterForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRegister;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

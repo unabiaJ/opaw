@@ -75,11 +75,13 @@ public class SalesForm extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         cmbFish = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblItems = new javax.swing.JTable();
         save = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         lblTotal = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         txtDate = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -88,10 +90,12 @@ public class SalesForm extends javax.swing.JFrame {
         cmbPayment = new javax.swing.JComboBox<>();
         btnReceipt = new javax.swing.JButton();
         lblSaved = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(229, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 51, 102));
@@ -104,9 +108,9 @@ public class SalesForm extends javax.swing.JFrame {
                 goBackActionPerformed(evt);
             }
         });
-        jPanel2.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, -1, -1));
+        jPanel2.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 26)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("SALES FORM");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
@@ -163,7 +167,12 @@ public class SalesForm extends javax.swing.JFrame {
         jLabel9.setText("ADD FISH ITEM");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 850, 190));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel10.setText("jLabel10");
+        jLabel10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 190));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 860, 190));
 
         tblItems.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -188,7 +197,7 @@ public class SalesForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblItems);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 860, 130));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 860, 100));
 
         save.setBackground(new java.awt.Color(0, 102, 255));
         save.setText("SAVE TRANSACTION");
@@ -197,37 +206,46 @@ public class SalesForm extends javax.swing.JFrame {
                 saveActionPerformed(evt);
             }
         });
-        jPanel1.add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 860, -1));
+        jPanel1.add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 860, 40));
 
-        jPanel4.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel4.setBackground(new java.awt.Color(0, 102, 153));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblTotal.setForeground(new java.awt.Color(255, 255, 255));
         lblTotal.setText("TOTAL:");
-        jPanel4.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 0, 180, 40));
+        jPanel4.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 230, 60));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 860, 40));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel11.setText("jLabel11");
+        jLabel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 60));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 860, 60));
 
         txtDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDateActionPerformed(evt);
             }
         });
-        jPanel1.add(txtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 150, -1));
+        jPanel1.add(txtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 116, 150, 40));
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Sale Date:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, -1, -1));
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Payment Status:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, -1, -1));
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Buyer:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         cmbBuyer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(cmbBuyer, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 126, 210, 30));
+        jPanel1.add(cmbBuyer, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 112, 210, 40));
 
         cmbPayment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paid", "Unpaid", " " }));
-        jPanel1.add(cmbPayment, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 126, 200, 30));
+        jPanel1.add(cmbPayment, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 116, 200, 40));
 
         btnReceipt.setBackground(new java.awt.Color(0, 102, 255));
         btnReceipt.setText("VIEW RECEIPT");
@@ -240,6 +258,10 @@ public class SalesForm extends javax.swing.JFrame {
 
         lblSaved.setText("SAVE ANOTHER");
         jPanel1.add(lblSaved, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 540, 180, 40));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 900, 520));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
@@ -381,8 +403,11 @@ public class SalesForm extends javax.swing.JFrame {
     private javax.swing.JButton goBack;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

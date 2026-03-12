@@ -66,6 +66,8 @@ public class UserDashboard extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         btnNewSale = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         sjkc = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         lblWelcome = new javax.swing.JLabel();
@@ -80,10 +82,12 @@ public class UserDashboard extends javax.swing.JFrame {
         lblStatRev = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         lblStatStatus = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(229, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 153));
@@ -95,7 +99,7 @@ public class UserDashboard extends javax.swing.JFrame {
                 btnProfileActionPerformed(evt);
             }
         });
-        jPanel2.add(btnProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 130, 20));
+        jPanel2.add(btnProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 190, 40));
 
         btnLogout.setText("LOGOUT");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +107,7 @@ public class UserDashboard extends javax.swing.JFrame {
                 btnLogoutActionPerformed(evt);
             }
         });
-        jPanel2.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 130, 20));
+        jPanel2.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 190, 40));
 
         btnNewSale.setText("NEW SALE");
         btnNewSale.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +115,7 @@ public class UserDashboard extends javax.swing.JFrame {
                 btnNewSaleActionPerformed(evt);
             }
         });
-        jPanel2.add(btnNewSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 130, 20));
+        jPanel2.add(btnNewSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 190, 40));
 
         jButton1.setText("SALE HISTORY");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +123,15 @@ public class UserDashboard extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 130, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 190, 40));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/8.png"))); // NOI18N
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 80, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 600));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 600));
 
@@ -130,7 +142,7 @@ public class UserDashboard extends javax.swing.JFrame {
         lblWelcome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblWelcome.setForeground(new java.awt.Color(255, 255, 255));
         lblWelcome.setText("MY DASHBOARD");
-        sjkc.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        sjkc.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         lblWelcome1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblWelcome1.setForeground(new java.awt.Color(255, 255, 255));
@@ -165,7 +177,7 @@ public class UserDashboard extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblSales);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 500, 140));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 620, 140));
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 153));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -191,6 +203,10 @@ public class UserDashboard extends javax.swing.JFrame {
         jPanel5.add(lblStatStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 130, 60));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, 140, 90));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 690, 600));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
@@ -237,6 +253,9 @@ public class UserDashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnNewSale;
     private javax.swing.JButton btnProfile;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

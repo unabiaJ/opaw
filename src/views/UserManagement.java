@@ -67,17 +67,20 @@ public class UserManagement extends javax.swing.JFrame {
         cmbRole = new javax.swing.JComboBox<>();
         btnView = new javax.swing.JButton();
         btnApprove = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
         lblPendingCount = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         Back = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(229, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Search:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 230, 30));
@@ -210,8 +213,14 @@ public class UserManagement extends javax.swing.JFrame {
         });
         jPanel3.add(btnApprove, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 160, 30));
 
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel12.setText("jLabel12");
+        jLabel12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 490));
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 370, 490));
 
+        lblPendingCount.setForeground(new java.awt.Color(255, 255, 255));
         lblPendingCount.setText("jLabel10");
         jPanel1.add(lblPendingCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 400, 20));
 
@@ -229,9 +238,13 @@ public class UserManagement extends javax.swing.JFrame {
                 BackActionPerformed(evt);
             }
         });
-        jPanel2.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, -1, -1));
+        jPanel2.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 90));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel11.setText("jLabel11");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 900, 510));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
@@ -540,6 +553,8 @@ public class UserManagement extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

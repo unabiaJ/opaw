@@ -60,6 +60,7 @@ public class EditProfileForm extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         lblAvatar = new javax.swing.JLabel();
         lblFullName = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         txtLname = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
@@ -71,26 +72,27 @@ public class EditProfileForm extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
         lblStatusMsg = new javax.swing.JLabel();
         lblValType = new javax.swing.JTextField();
         lblValStatus = new javax.swing.JTextField();
         lblValId = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         txtFname = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 153));
+        jPanel2.setBackground(new java.awt.Color(0, 51, 102));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblWelcome.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        lblWelcome.setFont(new java.awt.Font("Tahoma", 1, 26)); // NOI18N
         lblWelcome.setForeground(new java.awt.Color(255, 255, 255));
         lblWelcome.setText("MY PROFILE");
         jPanel2.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
@@ -112,7 +114,7 @@ public class EditProfileForm extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(174, 217, 238));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(0, 102, 153));
+        jPanel4.setBackground(new java.awt.Color(0, 153, 204));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblAvatar.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
@@ -126,6 +128,11 @@ public class EditProfileForm extends javax.swing.JFrame {
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 180, 90));
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 110));
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 900, 110));
 
         txtLname.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +143,7 @@ public class EditProfileForm extends javax.swing.JFrame {
         jPanel1.add(txtLname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 680, 30));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 820, 20));
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Last Name:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
@@ -146,6 +154,7 @@ public class EditProfileForm extends javax.swing.JFrame {
         });
         jPanel1.add(lblValUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 340, 280, 30));
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("First Name:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
 
@@ -161,23 +170,22 @@ public class EditProfileForm extends javax.swing.JFrame {
         });
         jPanel5.add(saveProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 680, -1));
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("User Type:");
         jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("User Status:");
         jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("User ID:");
         jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
-        jPanel5.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 830, 10));
+        jPanel5.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 820, 10));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Change Password (optional)");
-        jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-
-        lblStatusMsg.setForeground(new java.awt.Color(0, 51, 153));
+        lblStatusMsg.setForeground(new java.awt.Color(255, 255, 255));
         lblStatusMsg.setText("STATUS");
-        jPanel5.add(lblStatusMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, -1, -1));
+        jPanel5.add(lblStatusMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
         lblValType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,17 +200,26 @@ public class EditProfileForm extends javax.swing.JFrame {
             }
         });
         jPanel5.add(lblValStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 680, 30));
+
+        lblValId.setForeground(new java.awt.Color(255, 255, 255));
         jPanel5.add(lblValId, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 50, 20));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, -290, 900, 510));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 900, 220));
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("User Name:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Edit Profile Information");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Email Address:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
 
@@ -219,6 +236,10 @@ public class EditProfileForm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtFname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 680, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 90, 900, 290));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
@@ -299,7 +320,9 @@ public class EditProfileForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

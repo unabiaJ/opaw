@@ -104,20 +104,24 @@ public class AdminDashboard extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         btnUserMgmt = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         lblUserInfo = new javax.swing.JLabel();
         lblWelcome1 = new javax.swing.JLabel();
         lblWelcome = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         lblPendingBadge = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(229, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 153));
@@ -130,7 +134,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 btnFishTypeActionPerformed(evt);
             }
         });
-        jPanel2.add(btnFishType, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 210, 30));
+        jPanel2.add(btnFishType, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 210, 40));
 
         btnBuyers.setText("BUYERS");
         btnBuyers.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +142,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 btnBuyersActionPerformed(evt);
             }
         });
-        jPanel2.add(btnBuyers, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 210, 30));
+        jPanel2.add(btnBuyers, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 210, 40));
 
         btnSales.setText("SALES");
         btnSales.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +150,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 btnSalesActionPerformed(evt);
             }
         });
-        jPanel2.add(btnSales, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 210, 30));
+        jPanel2.add(btnSales, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 210, 40));
 
         btnProfile.setText("MY PROFILE");
         btnProfile.addActionListener(new java.awt.event.ActionListener() {
@@ -154,15 +158,15 @@ public class AdminDashboard extends javax.swing.JFrame {
                 btnProfileActionPerformed(evt);
             }
         });
-        jPanel2.add(btnProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 210, 30));
+        jPanel2.add(btnProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 210, 40));
 
-        btnLogout.setText("Logout");
+        btnLogout.setText("LOGOUT");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogoutActionPerformed(evt);
             }
         });
-        jPanel2.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 210, 30));
+        jPanel2.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 210, 40));
 
         btnUserMgmt.setText("USER MANAGEMENT");
         btnUserMgmt.addActionListener(new java.awt.event.ActionListener() {
@@ -170,11 +174,14 @@ public class AdminDashboard extends javax.swing.JFrame {
                 btnUserMgmtActionPerformed(evt);
             }
         });
-        jPanel2.add(btnUserMgmt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 210, 30));
+        jPanel2.add(btnUserMgmt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 210, 40));
 
         jPanel4.setBackground(new java.awt.Color(153, 204, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 690, 70));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/dashboard.jpg"))); // NOI18N
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 30, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 600));
 
@@ -196,28 +203,35 @@ public class AdminDashboard extends javax.swing.JFrame {
         lblWelcome.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         lblWelcome.setForeground(new java.awt.Color(255, 255, 255));
         lblWelcome.setText("ADMIN DASHBOARD");
-        jPanel3.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        jPanel3.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/dashboard.jpg"))); // NOI18N
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 690, 120));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 150, 80));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 250, 130));
 
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 153)));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 220, 150, 80));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 370, 250, 130));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 153)));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, 160, 80));
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 370, 250, 130));
 
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 0)));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 220, 160, 80));
+        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 250, 130));
 
         lblPendingBadge.setText("account(s) awaiting approval \\u2014 go to USER MANAGEMENT to approve.");
         jPanel1.add(lblPendingBadge, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 510, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
@@ -315,6 +329,9 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnProfile;
     private javax.swing.JButton btnSales;
     private javax.swing.JButton btnUserMgmt;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

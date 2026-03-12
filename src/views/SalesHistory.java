@@ -61,14 +61,18 @@ public class SalesHistory extends javax.swing.JFrame {
         lblItemTotal = new javax.swing.JLabel();
         lblWelcome1 = new javax.swing.JLabel();
         lblItemsTitle = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel2.setBackground(new java.awt.Color(229, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Search:");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
         jPanel2.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 230, 30));
@@ -103,7 +107,7 @@ public class SalesHistory extends javax.swing.JFrame {
         });
         jPanel2.add(addUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 120, 120, -1));
 
-        jPanel3.setBackground(new java.awt.Color(0, 102, 153));
+        jPanel3.setBackground(new java.awt.Color(0, 51, 102));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         back.setText("BACK TO DASHBOARD");
@@ -114,7 +118,7 @@ public class SalesHistory extends javax.swing.JFrame {
         });
         jPanel3.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, -1, -1));
 
-        lblWelcome.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        lblWelcome.setFont(new java.awt.Font("Tahoma", 1, 26)); // NOI18N
         lblWelcome.setForeground(new java.awt.Color(255, 255, 255));
         lblWelcome.setText("SALE HISTORY");
         jPanel3.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
@@ -149,14 +153,25 @@ public class SalesHistory extends javax.swing.JFrame {
         jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, 230, 40));
 
         lblWelcome1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblWelcome1.setForeground(new java.awt.Color(255, 255, 255));
         lblWelcome1.setText("Welcome, Admin");
         jPanel4.add(lblWelcome1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         lblItemsTitle.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblItemsTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblItemsTitle.setText("Items for Sale #");
         jPanel4.add(lblItemsTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 230, -1));
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 240));
+
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 850, 240));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 900, 510));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
@@ -244,6 +259,8 @@ public class SalesHistory extends javax.swing.JFrame {
     private javax.swing.JButton back;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

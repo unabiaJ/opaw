@@ -33,29 +33,28 @@ public class ReceiptForm extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtReceipt = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblReceiptTitle.setText("Receipt #\" + saleId + \"   |   Date: \" + date + \"   |   \" + payment");
         jPanel1.add(lblReceiptTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 350, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 51, 102));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         goBack.setBackground(new java.awt.Color(255, 204, 204));
-        goBack.setText("Go back to Dashboard");
+        goBack.setText("Back");
         goBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goBackActionPerformed(evt);
             }
         });
-        jPanel2.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, -1, -1));
+        jPanel2.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 30, 80, -1));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 26)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("FISHSALE TRACKER");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
@@ -63,7 +62,7 @@ public class ReceiptForm extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("OFFICIAL SALES RECEIPT");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 90));
 
@@ -73,7 +72,7 @@ public class ReceiptForm extends javax.swing.JFrame {
                 printReceiptActionPerformed(evt);
             }
         });
-        jPanel1.add(printReceipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 550, -1, 30));
+        jPanel1.add(printReceipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, -1, 40));
 
         btnNewSale.setText("NEW SALE");
         btnNewSale.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +80,7 @@ public class ReceiptForm extends javax.swing.JFrame {
                 btnNewSaleActionPerformed(evt);
             }
         });
-        jPanel1.add(btnNewSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, 100, 30));
+        jPanel1.add(btnNewSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, 150, 40));
 
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -89,13 +88,18 @@ public class ReceiptForm extends javax.swing.JFrame {
                 btnLogoutActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 550, 210, 30));
+        jPanel1.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 550, 160, 40));
 
+        txtReceipt.setBackground(new java.awt.Color(229, 255, 255));
         txtReceipt.setColumns(20);
         txtReceipt.setRows(5);
         jScrollPane1.setViewportView(txtReceipt);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 750, 400));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 490, 400));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 890, 510));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
@@ -209,6 +213,7 @@ private void loadReceipt() {
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnNewSale;
     private javax.swing.JButton goBack;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
