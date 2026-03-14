@@ -58,15 +58,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         fillStatCard(jPanel6, "Total Sales",      String.valueOf(totalSales),
                 new java.awt.Color(0, 204, 153));
 
-        // ── Pending badge ──────────────────────────────────────────────────────
-        if (pendingUsers > 0) {
-            lblPendingBadge.setText("  \u26A0  " + pendingUsers
-                    + " account(s) awaiting approval \u2014 go to USER MANAGEMENT to approve.");
-            lblPendingBadge.setForeground(new java.awt.Color(200, 80, 0));
-        } else {
-            lblPendingBadge.setText("  \u2714  All user accounts are approved.");
-            lblPendingBadge.setForeground(new java.awt.Color(0, 160, 60));
-        }
+     
     }
 
     /** Clears a stat panel and inserts a bold title + large number. */
@@ -105,17 +97,17 @@ public class AdminDashboard extends javax.swing.JFrame {
         btnUserMgmt = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         lblUserInfo = new javax.swing.JLabel();
         lblWelcome1 = new javax.swing.JLabel();
         lblWelcome = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        lblPendingBadge = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -183,6 +175,14 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/dashboard.jpg"))); // NOI18N
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 30, 30));
 
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/8.png"))); // NOI18N
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 80, 50));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 600));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 600));
 
         jPanel3.setBackground(new java.awt.Color(0, 51, 102));
@@ -203,10 +203,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         lblWelcome.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         lblWelcome.setForeground(new java.awt.Color(255, 255, 255));
         lblWelcome.setText("ADMIN DASHBOARD");
-        jPanel3.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/dashboard.jpg"))); // NOI18N
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+        jPanel3.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 690, 120));
 
@@ -225,9 +222,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 0)));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 250, 130));
-
-        lblPendingBadge.setText("account(s) awaiting approval \\u2014 go to USER MANAGEMENT to approve.");
-        jPanel1.add(lblPendingBadge, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 510, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -330,8 +324,9 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnSales;
     private javax.swing.JButton btnUserMgmt;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -341,7 +336,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblPendingBadge;
     private javax.swing.JLabel lblUserInfo;
     private javax.swing.JLabel lblWelcome;
     private javax.swing.JLabel lblWelcome1;

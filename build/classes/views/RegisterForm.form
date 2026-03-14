@@ -164,6 +164,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnRegister">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="99" red="66" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="REGISTER"/>
           </Properties>
           <Events>
@@ -246,6 +249,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnBack">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="66" red="0" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="GO BACK LOGIN"/>
           </Properties>
           <Events>
