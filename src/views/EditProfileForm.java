@@ -114,7 +114,7 @@ public class EditProfileForm extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(174, 217, 238));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(0, 153, 204));
+        jPanel4.setBackground(new java.awt.Color(0, 51, 102));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblAvatar.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
@@ -168,7 +168,7 @@ public class EditProfileForm extends javax.swing.JFrame {
                 saveProfileActionPerformed(evt);
             }
         });
-        jPanel5.add(saveProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 680, -1));
+        jPanel5.add(saveProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 169, 680, 40));
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("User Type:");
