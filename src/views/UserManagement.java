@@ -72,6 +72,7 @@ public class UserManagement extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         Back = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -197,6 +198,7 @@ public class UserManagement extends javax.swing.JFrame {
         cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel3.add(cmbRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 200, 30));
 
+        btnView.setBackground(new java.awt.Color(204, 255, 255));
         btnView.setText("VIEW DETAILS");
         btnView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,6 +207,7 @@ public class UserManagement extends javax.swing.JFrame {
         });
         jPanel3.add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, 160, 30));
 
+        btnApprove.setBackground(new java.awt.Color(204, 255, 255));
         btnApprove.setText("APPROVE USER");
         btnApprove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,29 +221,34 @@ public class UserManagement extends javax.swing.JFrame {
         jLabel12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 490));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 370, 490));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 370, 480));
 
         lblPendingCount.setForeground(new java.awt.Color(255, 255, 255));
         lblPendingCount.setText("jLabel10");
         jPanel1.add(lblPendingCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 400, 20));
 
-        jPanel2.setBackground(new java.awt.Color(0, 51, 102));
+        jPanel2.setBackground(new java.awt.Color(8, 66, 124));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("MANAGE USERS");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
 
+        Back.setBackground(new java.awt.Color(255, 204, 204));
         Back.setText("BACK TO DASHBOARD");
         Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackActionPerformed(evt);
             }
         });
-        jPanel2.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, -1, -1));
+        jPanel2.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, -1, 50));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 90));
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/l.png"))); // NOI18N
+        jLabel29.setText("jLabel2");
+        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 80));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 100));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -342,7 +350,7 @@ public class UserManagement extends javax.swing.JFrame {
             if (rs.next()) {
                 int n = rs.getInt(1);
                 if (n > 0) {
-                    lblPendingCount.setText("  \u26A0  " + n + " account(s) PENDING approval");
+                    lblPendingCount.setText("  \u26A0  " + n + " account PENDING ");
                     lblPendingCount.setForeground(new java.awt.Color(200, 80, 0));
                 } else {
                     lblPendingCount.setText("  \u2714  No pending accounts.");
@@ -556,6 +564,7 @@ public class UserManagement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

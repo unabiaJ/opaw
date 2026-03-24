@@ -1,42 +1,52 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * BuyerForm.java  –  FishSale Tracker
+ * All CRUD buttons fully implemented:
+ *   ADD, UPDATE, DELETE, CLEAR, SEARCH, BACK (jButton2), BACK TO DASHBOARD (back2)
  */
 package views;
-
+ 
 import config.config;
 import config.Session;
-
-/**
- *
- * @author Administrator
- */
+ 
 public class BuyerForm extends javax.swing.JFrame {
-
+ 
+    /** Holds the buyer_id of the row currently selected in the table; -1 = none */
     private int selectedId = -1;
-
+ 
+    // ─────────────────────────────────────────────────────────────────────────
+    //  CONSTRUCTOR
+    // ─────────────────────────────────────────────────────────────────────────
     public BuyerForm() {
         initComponents();
         setLocationRelativeTo(null);
-
-        // ── REQUIRED LOGIN GUARD
+ 
+        // Guard: redirect to login if no active session
         if (!Session.requireLogin(this)) return;
-
-        // ── Populate combos
+ 
+        // Populate combo boxes
         cmbType.setModel(new javax.swing.DefaultComboBoxModel<>(
-            new String[]{"Wholesale", "Retail", "Individual"}));
+                new String[]{"Wholesale", "Retail", "Individual"}));
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(
-            new String[]{"Active", "Inactive"}));
-
+                new String[]{"Active", "Inactive"}));
+ 
+        // Apply consistent button styles
+        styleBtn(addRecord,    new java.awt.Color(0,   153, 51));
+        styleBtn(updateRecord, new java.awt.Color(0,   204, 204));
+        styleBtn(deleteRecord, new java.awt.Color(255, 51,  51));
+        styleBtn(clearForm,    new java.awt.Color(150, 150, 150));
+        styleBtn(jButton1,      new java.awt.Color(0,   102, 153));
+        styleBtn(back2,         new java.awt.Color(0,    51, 102));
+        styleBtn(back,      new java.awt.Color(0,    51, 102));
+ 
+        // Load all buyers on open
         loadData("");
-
-        // ── Row click → fill form
+ 
+        // Row-click → populate form fields
         tblBuyers.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) onRowClick();
         });
-
-        // ── Search: button click OR press Enter
+ 
+        // Search: button click or press Enter
         jButton1.addActionListener(e -> loadData(jTextField1.getText().trim()));
         jTextField1.addActionListener(e -> loadData(jTextField1.getText().trim()));
     }
@@ -50,10 +60,10 @@ public class BuyerForm extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtContact = new javax.swing.JTextField();
         txtFname = new javax.swing.JTextField();
-        addRecord1 = new javax.swing.JButton();
-        updateRecord1 = new javax.swing.JButton();
-        deleteRecord1 = new javax.swing.JButton();
-        clearForm1 = new javax.swing.JButton();
+        addRecord = new javax.swing.JButton();
+        updateRecord = new javax.swing.JButton();
+        deleteRecord = new javax.swing.JButton();
+        clearForm = new javax.swing.JButton();
         cmbType = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -73,8 +83,9 @@ public class BuyerForm extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        back = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         back2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -95,41 +106,41 @@ public class BuyerForm extends javax.swing.JFrame {
         jPanel5.add(txtContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 200, 30));
         jPanel5.add(txtFname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 200, 30));
 
-        addRecord1.setBackground(new java.awt.Color(0, 153, 51));
-        addRecord1.setText("ADD");
-        addRecord1.addActionListener(new java.awt.event.ActionListener() {
+        addRecord.setBackground(new java.awt.Color(0, 153, 51));
+        addRecord.setText("ADD");
+        addRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addRecord1ActionPerformed(evt);
+                addRecordActionPerformed(evt);
             }
         });
-        jPanel5.add(addRecord1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 160, 30));
+        jPanel5.add(addRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 160, 30));
 
-        updateRecord1.setBackground(new java.awt.Color(0, 204, 204));
-        updateRecord1.setText("UPDATE");
-        updateRecord1.addActionListener(new java.awt.event.ActionListener() {
+        updateRecord.setBackground(new java.awt.Color(0, 204, 204));
+        updateRecord.setText("UPDATE");
+        updateRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateRecord1ActionPerformed(evt);
+                updateRecordActionPerformed(evt);
             }
         });
-        jPanel5.add(updateRecord1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 160, 30));
+        jPanel5.add(updateRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 160, 30));
 
-        deleteRecord1.setBackground(new java.awt.Color(255, 51, 51));
-        deleteRecord1.setText("DELETE");
-        deleteRecord1.addActionListener(new java.awt.event.ActionListener() {
+        deleteRecord.setBackground(new java.awt.Color(255, 51, 51));
+        deleteRecord.setText("DELETE");
+        deleteRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteRecord1ActionPerformed(evt);
+                deleteRecordActionPerformed(evt);
             }
         });
-        jPanel5.add(deleteRecord1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 160, 30));
+        jPanel5.add(deleteRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 160, 30));
 
-        clearForm1.setBackground(new java.awt.Color(204, 204, 204));
-        clearForm1.setText("CLEAR");
-        clearForm1.addActionListener(new java.awt.event.ActionListener() {
+        clearForm.setBackground(new java.awt.Color(204, 204, 204));
+        clearForm.setText("CLEAR");
+        clearForm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearForm1ActionPerformed(evt);
+                clearFormActionPerformed(evt);
             }
         });
-        jPanel5.add(clearForm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 160, 30));
+        jPanel5.add(clearForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 160, 30));
 
         cmbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel5.add(cmbType, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 200, 30));
@@ -171,7 +182,7 @@ public class BuyerForm extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
         jLabel3.setText("jLabel3");
         jLabel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 490));
+        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 370, 480));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 370, 490));
 
@@ -208,24 +219,29 @@ public class BuyerForm extends javax.swing.JFrame {
         jButton1.setText("SEARCH");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 100, 30));
 
-        jPanel6.setBackground(new java.awt.Color(0, 51, 102));
+        jPanel6.setBackground(new java.awt.Color(8, 66, 124));
         jPanel6.setPreferredSize(new java.awt.Dimension(880, 80));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setText("Back");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        back.setBackground(new java.awt.Color(255, 204, 204));
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 30, -1, -1));
+        jPanel6.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(745, 30, 140, 40));
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 26)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("BUYER FORM");
-        jPanel6.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+        jPanel6.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 90));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/l.png"))); // NOI18N
+        jLabel4.setText("jLabel2");
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 80));
+
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 100));
 
         back2.setText("BACK TO DASHBOARD");
         back2.addActionListener(new java.awt.event.ActionListener() {
@@ -284,36 +300,170 @@ public class BuyerForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1KeyTyped
 
-    private void addRecord1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRecord1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addRecord1ActionPerformed
+    private void addRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRecordActionPerformed
+        if (!validateFields()) return;
+ 
+        String fname   = txtFname.getText().trim();
+        String lname   = txtLname.getText().trim();
+        String contact = txtContact.getText().trim();
+        String address = txtAddress.getText().trim();
+        String email   = txtEmail.getText().trim();
+        String type    = cmbType.getSelectedItem().toString();
+        String status  = cmbStatus.getSelectedItem().toString();
+ 
+        // Check for duplicate email
+        try (java.sql.Connection conn = config.connectDB();
+             java.sql.PreparedStatement ps = conn.prepareStatement(
+                 "SELECT COUNT(*) FROM tbl_buyer WHERE buyer_email = ?")) {
+            ps.setString(1, email);
+            java.sql.ResultSet rs = ps.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                    "A buyer with this email already exists.",
+                    "Duplicate Email",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (java.sql.SQLException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "DB Error: " + ex.getMessage(), "Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+ 
+        new config().addRecord(
+            "INSERT INTO tbl_buyer " +
+            "(buyer_fname, buyer_lname, buyer_contact, buyer_address, buyer_email, buyer_type, buyer_status) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?)",
+            fname, lname, contact, address, email, type, status);
+ 
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "Buyer added successfully!",
+            "Success",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+ 
+        clearForm();
+        loadData("");    }//GEN-LAST:event_addRecordActionPerformed
 
-    private void updateRecord1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRecord1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateRecord1ActionPerformed
+    private void updateRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRecordActionPerformed
+        if (selectedId == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Please select a buyer from the table first.",
+                "No Selection",
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!validateFields()) return;
+ 
+        // Confirm update
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this,
+            "Update this buyer's information?",
+            "Confirm Update",
+            javax.swing.JOptionPane.YES_NO_OPTION);
+        if (confirm != javax.swing.JOptionPane.YES_OPTION) return;
+ 
+        new config().addRecord(
+            "UPDATE tbl_buyer SET " +
+            "buyer_fname=?, buyer_lname=?, buyer_contact=?, " +
+            "buyer_address=?, buyer_email=?, buyer_type=?, buyer_status=? " +
+            "WHERE buyer_id=?",
+            txtFname.getText().trim(),
+            txtLname.getText().trim(),
+            txtContact.getText().trim(),
+            txtAddress.getText().trim(),
+            txtEmail.getText().trim(),
+            cmbType.getSelectedItem().toString(),
+            cmbStatus.getSelectedItem().toString(),
+            selectedId);
+ 
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "Buyer updated successfully!",
+            "Success",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+ 
+        clearForm();
+        loadData("");    }//GEN-LAST:event_updateRecordActionPerformed
 
-    private void deleteRecord1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRecord1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteRecord1ActionPerformed
+    private void deleteRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRecordActionPerformed
+        if (selectedId == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Please select a buyer from the table first.",
+                "No Selection",
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+ 
+        // Show buyer name in confirm dialog
+        String buyerName = txtFname.getText().trim() + " " + txtLname.getText().trim();
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this,
+            "Are you sure you want to delete buyer:\n" + buyerName + "?\n" +
+            ".",
+            "Confirm Delete",
+            javax.swing.JOptionPane.YES_NO_OPTION,
+            javax.swing.JOptionPane.WARNING_MESSAGE);
+        if (confirm != javax.swing.JOptionPane.YES_OPTION) return;
+ 
+        try {
+            new config().addRecord(
+                "DELETE FROM tbl_buyer WHERE buyer_id=?",
+                selectedId);
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Buyer deleted successfully.",
+                "Deleted",
+                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Cannot delete: this buyer may be linked to existing sales.\n" + ex.getMessage(),
+                "Delete Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+ 
+        clearForm();
+        loadData("");    }//GEN-LAST:event_deleteRecordActionPerformed
 
-    private void clearForm1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearForm1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clearForm1ActionPerformed
+    private void clearFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFormActionPerformed
+ clearForm();    }//GEN-LAST:event_clearFormActionPerformed
 
     private void back2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_back2ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         dispose();
-        new AdminDashboard().setVisible(true);            // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        new AdminDashboard().setVisible(true);         // TODO add your handling code here:
+    }//GEN-LAST:event_backActionPerformed
     private void clearForm() {
         selectedId = -1;
-        txtFname.setText(""); txtLname.setText(""); txtContact.setText("");
-        txtAddress.setText(""); txtEmail.setText("");
-        cmbType.setSelectedIndex(0); cmbStatus.setSelectedIndex(0);
+        txtFname.setText("");
+        txtLname.setText("");
+        txtContact.setText("");
+        txtAddress.setText("");
+        txtEmail.setText("");
+        cmbType.setSelectedIndex(0);
+        cmbStatus.setSelectedIndex(0);
         tblBuyers.clearSelection();
+    }
+        private boolean validateFields() {
+        if (txtFname.getText().trim().isEmpty() ||
+            txtLname.getText().trim().isEmpty() ||
+            txtContact.getText().trim().isEmpty() ||
+            txtAddress.getText().trim().isEmpty() ||
+            txtEmail.getText().trim().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "All fields are required.",
+                "Validation Error",
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        // Simple email format check
+        if (!txtEmail.getText().trim().matches("^[\\w._%+\\-]+@[\\w.\\-]+\\.[a-zA-Z]{2,}$")) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Please enter a valid email address.",
+                "Validation Error",
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
     }
     /**
      * @param args the command line arguments
@@ -324,14 +474,14 @@ public class BuyerForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addRecord1;
+    private javax.swing.JButton addRecord;
+    private javax.swing.JButton back;
     private javax.swing.JButton back2;
-    private javax.swing.JButton clearForm1;
+    private javax.swing.JButton clearForm;
     private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JComboBox<String> cmbType;
-    private javax.swing.JButton deleteRecord1;
+    private javax.swing.JButton deleteRecord;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -344,6 +494,7 @@ public class BuyerForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -356,6 +507,6 @@ public class BuyerForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFname;
     private javax.swing.JTextField txtLname;
-    private javax.swing.JButton updateRecord1;
+    private javax.swing.JButton updateRecord;
     // End of variables declaration//GEN-END:variables
 }

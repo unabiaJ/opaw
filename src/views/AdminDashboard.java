@@ -91,22 +91,23 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnFishType = new javax.swing.JButton();
         btnBuyers = new javax.swing.JButton();
-        btnSales = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         btnUserMgmt = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        SaleHistorybtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         lblUserInfo = new javax.swing.JLabel();
-        lblWelcome1 = new javax.swing.JLabel();
         lblWelcome = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lblWelcome1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -115,105 +116,111 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 51, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.setForeground(new java.awt.Color(0, 102, 153));
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setForeground(new java.awt.Color(204, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnFishType.setBackground(new java.awt.Color(204, 255, 255));
         btnFishType.setText("FISH TYPES");
         btnFishType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFishTypeActionPerformed(evt);
             }
         });
-        jPanel2.add(btnFishType, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 210, 40));
+        jPanel2.add(btnFishType, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 190, 40));
 
+        btnBuyers.setBackground(new java.awt.Color(204, 255, 255));
         btnBuyers.setText("BUYERS");
         btnBuyers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuyersActionPerformed(evt);
             }
         });
-        jPanel2.add(btnBuyers, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 210, 40));
+        jPanel2.add(btnBuyers, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 190, 40));
 
-        btnSales.setText("SALES");
-        btnSales.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalesActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnSales, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 210, 40));
-
+        btnProfile.setBackground(new java.awt.Color(204, 255, 255));
         btnProfile.setText("MY PROFILE");
         btnProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProfileActionPerformed(evt);
             }
         });
-        jPanel2.add(btnProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 210, 40));
+        jPanel2.add(btnProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 190, 40));
 
+        btnLogout.setBackground(new java.awt.Color(255, 204, 204));
         btnLogout.setText("LOGOUT");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogoutActionPerformed(evt);
             }
         });
-        jPanel2.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 210, 40));
+        jPanel2.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 190, 40));
 
+        btnUserMgmt.setBackground(new java.awt.Color(204, 255, 255));
         btnUserMgmt.setText("USER MANAGEMENT");
         btnUserMgmt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUserMgmtActionPerformed(evt);
             }
         });
-        jPanel2.add(btnUserMgmt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 210, 40));
+        jPanel2.add(btnUserMgmt, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 190, 40));
 
         jPanel4.setBackground(new java.awt.Color(153, 204, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 690, 70));
 
-        jButton1.setText("SALE HISTORY");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        SaleHistorybtn.setBackground(new java.awt.Color(204, 255, 255));
+        SaleHistorybtn.setText("SALE HISTORY");
+        SaleHistorybtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                SaleHistorybtnActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 210, 40));
+        jPanel2.add(SaleHistorybtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 190, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 600));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 210, 460));
 
-        jPanel3.setBackground(new java.awt.Color(0, 51, 102));
+        jPanel3.setBackground(new java.awt.Color(8, 66, 124));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 670, 10));
+        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 750, 10));
 
         lblUserInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblUserInfo.setForeground(new java.awt.Color(255, 255, 255));
         lblUserInfo.setText("Email:    |   Role: Admin   |   Status:");
-        jPanel3.add(lblUserInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
-
-        lblWelcome1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblWelcome1.setForeground(new java.awt.Color(255, 255, 255));
-        lblWelcome1.setText("Welcome, Admin");
-        jPanel3.add(lblWelcome1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+        jPanel3.add(lblUserInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
 
         lblWelcome.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         lblWelcome.setForeground(new java.awt.Color(255, 255, 255));
         lblWelcome.setText("ADMIN DASHBOARD");
-        jPanel3.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jPanel3.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 690, 120));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/l.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 100));
 
+        lblWelcome1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblWelcome1.setForeground(new java.awt.Color(255, 255, 255));
+        lblWelcome1.setText("Welcome, Admin");
+        jPanel3.add(lblWelcome1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 120));
+
+        jPanel5.setBackground(new java.awt.Color(153, 204, 0));
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 250, 130));
 
+        jPanel6.setBackground(new java.awt.Color(255, 204, 204));
         jPanel6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 370, 250, 130));
 
+        jPanel7.setBackground(new java.awt.Color(0, 153, 204));
         jPanel7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 370, 250, 130));
 
+        jPanel8.setBackground(new java.awt.Color(204, 204, 0));
         jPanel8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 250, 130));
@@ -221,6 +228,9 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
+
+        jLabel3.setText("jLabel3");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
@@ -253,18 +263,14 @@ public class AdminDashboard extends javax.swing.JFrame {
         new UserManagement().setVisible(true);
     }//GEN-LAST:event_btnUserMgmtActionPerformed
 
-    private void btnSalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalesActionPerformed
-        dispose();
-        new SalesHistory().setVisible(true);    }//GEN-LAST:event_btnSalesActionPerformed
-
     private void btnBuyersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyersActionPerformed
         dispose();
         new BuyerForm().setVisible(true);    }//GEN-LAST:event_btnBuyersActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-        SalesHistory history = new SalesHistory();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void SaleHistorybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaleHistorybtnActionPerformed
+        dispose();                                  // close Admin Dashboard first
+        new SalesHistory().setVisible(true); 
+    }//GEN-LAST:event_SaleHistorybtnActionPerformed
     private javax.swing.JButton sideBtn(String text) {
         javax.swing.JButton b = new javax.swing.JButton(text);
         b.setFont(new java.awt.Font("Segoe UI", 0, 13));
@@ -317,14 +323,15 @@ public class AdminDashboard extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new AdminDashboard().setVisible(true));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton SaleHistorybtn;
     private javax.swing.JButton btnBuyers;
     private javax.swing.JButton btnFishType;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnProfile;
-    private javax.swing.JButton btnSales;
     private javax.swing.JButton btnUserMgmt;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -56,6 +56,7 @@ public class EditProfileForm extends javax.swing.JFrame {
         lblWelcome = new javax.swing.JLabel();
         goBack = new javax.swing.JButton();
         lblUsernameDisp = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         lblAvatar = new javax.swing.JLabel();
@@ -89,27 +90,32 @@ public class EditProfileForm extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(0, 51, 102));
+        jPanel2.setBackground(new java.awt.Color(8, 66, 124));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblWelcome.setFont(new java.awt.Font("Tahoma", 1, 26)); // NOI18N
         lblWelcome.setForeground(new java.awt.Color(255, 255, 255));
         lblWelcome.setText("MY PROFILE");
-        jPanel2.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        jPanel2.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
 
+        goBack.setBackground(new java.awt.Color(255, 204, 204));
         goBack.setText("BACK");
         goBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goBackActionPerformed(evt);
             }
         });
-        jPanel2.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 30, 100, -1));
+        jPanel2.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 150, 40));
 
         lblUsernameDisp.setForeground(new java.awt.Color(255, 255, 255));
         lblUsernameDisp.setText("Email:    |   Role:    |   Status:");
-        jPanel2.add(lblUsernameDisp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 280, -1));
+        jPanel2.add(lblUsernameDisp, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 280, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 90));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/l.png"))); // NOI18N
+        jLabel12.setText("jLabel2");
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 80));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 100));
 
         jPanel3.setBackground(new java.awt.Color(174, 217, 238));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -126,12 +132,12 @@ public class EditProfileForm extends javax.swing.JFrame {
         lblFullName.setText("USER");
         jPanel4.add(lblFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 160, -1));
 
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 180, 90));
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 180, 80));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
         jLabel4.setText("jLabel4");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 110));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 900, 100));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 900, 110));
 
@@ -161,7 +167,7 @@ public class EditProfileForm extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(174, 217, 238));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        saveProfile.setBackground(new java.awt.Color(0, 102, 153));
+        saveProfile.setBackground(new java.awt.Color(204, 255, 255));
         saveProfile.setText("SAVE CHANGES");
         saveProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,7 +189,7 @@ public class EditProfileForm extends javax.swing.JFrame {
         jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
         jPanel5.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 820, 10));
 
-        lblStatusMsg.setForeground(new java.awt.Color(255, 255, 255));
+        lblStatusMsg.setForeground(new java.awt.Color(51, 255, 0));
         lblStatusMsg.setText("STATUS");
         jPanel5.add(lblStatusMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
@@ -320,6 +326,7 @@ public class EditProfileForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

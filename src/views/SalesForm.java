@@ -62,8 +62,9 @@ public class SalesForm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        goBack = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         txtPrice = new javax.swing.JTextField();
@@ -98,24 +99,28 @@ public class SalesForm extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(229, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(0, 51, 102));
+        jPanel2.setBackground(new java.awt.Color(8, 66, 124));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        goBack.setBackground(new java.awt.Color(255, 204, 204));
-        goBack.setText("Go back to Dashboard");
-        goBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goBackActionPerformed(evt);
-            }
-        });
-        jPanel2.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 26)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("SALES FORM");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 90));
+        jButton2.setBackground(new java.awt.Color(255, 204, 204));
+        jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, 160, 40));
+
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/l.png"))); // NOI18N
+        jLabel29.setText("jLabel2");
+        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 80));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 100));
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 153));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -170,9 +175,9 @@ public class SalesForm extends javax.swing.JFrame {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
         jLabel10.setText("jLabel10");
         jLabel10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 190));
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 190));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 860, 190));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 880, 190));
 
         tblItems.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,16 +202,16 @@ public class SalesForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblItems);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 860, 100));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 880, 100));
 
-        save.setBackground(new java.awt.Color(0, 102, 255));
+        save.setBackground(new java.awt.Color(204, 255, 255));
         save.setText("SAVE TRANSACTION");
         save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveActionPerformed(evt);
             }
         });
-        jPanel1.add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 860, 40));
+        jPanel1.add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 880, 40));
 
         jPanel4.setBackground(new java.awt.Color(0, 102, 153));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -218,9 +223,9 @@ public class SalesForm extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
         jLabel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 60));
+        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 60));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 860, 60));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 880, 60));
 
         txtDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,7 +250,7 @@ public class SalesForm extends javax.swing.JFrame {
         jPanel1.add(cmbBuyer, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 112, 210, 40));
 
         cmbPayment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paid", "Unpaid", " " }));
-        jPanel1.add(cmbPayment, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 116, 200, 40));
+        jPanel1.add(cmbPayment, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, 200, 40));
 
         btnReceipt.setBackground(new java.awt.Color(0, 102, 255));
         btnReceipt.setText("VIEW RECEIPT");
@@ -277,68 +282,76 @@ public class SalesForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtQtyActionPerformed
 
-    private void goBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackActionPerformed
-        dispose();
-        if ("admin".equalsIgnoreCase(Session.getInstance().getType()))
-            new SalesHistory().setVisible(true);
-        else
-            new UserDashboard().setVisible(true);
-            { dispose(); new UserDashboard().setVisible(true); }    }//GEN-LAST:event_goBackActionPerformed
-
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-      if (cmbBuyer.getSelectedItem() == null || cmbBuyer.getSelectedItem().toString().isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please select a buyer."); return;
+                                 
+    // 1. UI Validations (Front-end check)
+    if (cmbBuyer.getSelectedItem() == null || items.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Ensure a buyer is selected and items are added.");
+        return;
+    }
+
+    // 2. Data Preparation
+    int buyerId = Integer.parseInt(cmbBuyer.getSelectedItem().toString().split(" - ")[0]);
+    int userId  = Session.getInstance().getId();
+    String date = txtDate.getText().trim();
+    String paymentStatus = cmbPayment.getSelectedItem().toString(); // "Paid", "Unpaid", etc.
+    double total = 0; 
+    for (Object[] r : items) total += (Double) r[4];
+
+    try (java.sql.Connection conn = config.connectDB()) {
+        conn.setAutoCommit(false);
+
+        // 3. Save to tbl_sale (This happens regardless of payment status)
+        java.sql.PreparedStatement ps = conn.prepareStatement(
+            "INSERT INTO tbl_sale (buyer_id, user_id, sale_date, total_amount, payment_status) VALUES (?,?,?,?,?)",
+            java.sql.Statement.RETURN_GENERATED_KEYS);
+        ps.setInt(1, buyerId); 
+        ps.setInt(2, userId); 
+        ps.setString(3, date);
+        ps.setDouble(4, total); 
+        ps.setString(5, paymentStatus); 
+        ps.executeUpdate();
+        
+        java.sql.ResultSet keys = ps.getGeneratedKeys();
+        int saleId = 0;
+        if (keys.next()) saleId = keys.getInt(1);
+
+        // 4. Save to tbl_sale_item (Individual fish items)
+        java.sql.PreparedStatement ps2 = conn.prepareStatement(
+            "INSERT INTO tbl_sale_item (sale_id, fish_type_id, quantity_kg, price_per_kg, subtotal) VALUES (?,?,?,?,?)");
+        for (Object[] r : items) {
+            ps2.setInt(1, saleId); 
+            ps2.setInt(2, (int) r[0]);
+            ps2.setDouble(3, (Double) r[2]); 
+            ps2.setDouble(4, (Double) r[3]); 
+            ps2.setDouble(5, (Double) r[4]);
+            ps2.addBatch();
         }
-        if (items.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please add at least one fish item."); return;
-        }
-        if (txtDate.getText().trim().isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a sale date."); return;
-        }
+        ps2.executeBatch();
+        
+        // Finalize the save to the database
+        conn.commit(); 
 
-        int buyerId = Integer.parseInt(cmbBuyer.getSelectedItem().toString().split(" - ")[0]);
-        int userId  = Session.getInstance().getId();
-        String date = txtDate.getText().trim();
-        String pay  = cmbPayment.getSelectedItem().toString();
-        double total = 0; for (Object[] r : items) total += (Double) r[4];
-
-        try (java.sql.Connection conn = config.connectDB()) {
-            conn.setAutoCommit(false);
-            java.sql.PreparedStatement ps = conn.prepareStatement(
-                "INSERT INTO tbl_sale (buyer_id,user_id,sale_date,total_amount,payment_status) VALUES (?,?,?,?,?)",
-                java.sql.Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, buyerId); ps.setInt(2, userId); ps.setString(3, date);
-            ps.setDouble(4, total); ps.setString(5, pay);
-            ps.executeUpdate();
-            java.sql.ResultSet keys = ps.getGeneratedKeys();
-            int saleId = 0;
-            if (keys.next()) saleId = keys.getInt(1);
-
-            java.sql.PreparedStatement ps2 = conn.prepareStatement(
-                "INSERT INTO tbl_sale_item (sale_id,fish_type_id,quantity_kg,price_per_kg,subtotal) VALUES (?,?,?,?,?)");
-            for (Object[] r : items) {
-                ps2.setInt(1, saleId); ps2.setInt(2, (int) r[0]);
-                ps2.setDouble(3, (Double) r[2]); ps2.setDouble(4, (Double) r[3]); ps2.setDouble(5, (Double) r[4]);
-                ps2.addBatch();
-            }
-            ps2.executeBatch();
-            conn.commit();
-
-            // ── Show receipt automatically after saving
+        // 5. Post-Save Logic: Check if we should show the receipt
+        if (paymentStatus.equalsIgnoreCase("Unpaid")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Transaction saved to History as UNPAID/DEBT.");
+        } else {
             javax.swing.JOptionPane.showMessageDialog(this, "Transaction saved! Opening receipt...");
-            final int finalSaleId = saleId;
-            dispose();
-            // Go back to appropriate dashboard AND open receipt
-            if ("admin".equalsIgnoreCase(Session.getInstance().getType()))
-                new SalesHistory().setVisible(true);
-            else
-                new UserDashboard().setVisible(true);
-            // Open receipt window
-            new ReceiptForm(finalSaleId).setVisible(true);
-
-        } catch (java.sql.SQLException ex) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error saving: " + ex.getMessage());
+            new ReceiptForm(saleId).setVisible(true);
         }
+
+        // 6. Navigation
+        this.dispose();
+        if ("admin".equalsIgnoreCase(Session.getInstance().getType())) {
+            new SalesHistory().setVisible(true); // This will now show the new record
+        } else {
+            new UserDashboard().setVisible(true);
+        }
+
+    } catch (java.sql.SQLException ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage());
+    }
+
             }//GEN-LAST:event_saveActionPerformed
 
     private void addItemToListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemToListActionPerformed
@@ -372,11 +385,49 @@ public class SalesForm extends javax.swing.JFrame {
         updateTotal();        updateTotal();    }//GEN-LAST:event_addItemToListActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        int row = tblItems.getSelectedRow();
-        if (row < 0) { javax.swing.JOptionPane.showMessageDialog(this, "Select an item to remove."); return; }
-        items.remove(row);
-        ((javax.swing.table.DefaultTableModel) tblItems.getModel()).removeRow(row);
-       
+                                     
+    // 1. Get the selected row from the JTable
+    int selectedRow = tblItems.getSelectedRow();
+
+    // 2. Check if a row is actually selected
+    if (selectedRow < 0) { 
+        javax.swing.JOptionPane.showMessageDialog(this, "Please select an item from the table to remove."); 
+        return; 
+    }
+
+    // 3. Ask for confirmation before deleting
+    int confirm = javax.swing.JOptionPane.showConfirmDialog(
+        this, 
+        "Are you sure you want to remove this item?", 
+        "Confirm Removal", 
+        javax.swing.JOptionPane.YES_NO_OPTION,
+        javax.swing.JOptionPane.QUESTION_MESSAGE
+    );
+
+    // 4. If the user clicks 'Yes'
+    if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+        try {
+            // Convert view index to model index (important if the table is sortable)
+            int modelRow = tblItems.convertRowIndexToModel(selectedRow);
+
+            // 5. Remove from the backend ArrayList (used for DB saving)
+            if (modelRow < items.size()) {
+                items.remove(modelRow);
+            }
+
+            // 6. Remove from the JTable Model (UI display)
+            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tblItems.getModel();
+            model.removeRow(modelRow);
+
+            // 7. Recalculate the Total
+            // This method loops through the 'items' list and updates lblTotal
+            updateTotal(); 
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error removing item: " + e.getMessage());
+        }
+    }
+
         updateTotal();    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void btnReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReceiptActionPerformed
@@ -386,6 +437,11 @@ public class SalesForm extends javax.swing.JFrame {
             return;
         }
         new ReceiptForm(lastSaleId).setVisible(true);    }//GEN-LAST:event_btnReceiptActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+        new AdminDashboard().setVisible(true);            // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -400,12 +456,13 @@ public class SalesForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbBuyer;
     private javax.swing.JComboBox<String> cmbFish;
     private javax.swing.JComboBox<String> cmbPayment;
-    private javax.swing.JButton goBack;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

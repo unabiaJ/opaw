@@ -120,7 +120,7 @@ public class RegisterForm extends javax.swing.JFrame {
         jLabel9.setText("Sign up to your Account");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, -1, -1));
 
-        btnBack.setBackground(new java.awt.Color(0, 102, 204));
+        btnBack.setBackground(new java.awt.Color(204, 255, 255));
         btnBack.setText("GO BACK LOGIN");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
